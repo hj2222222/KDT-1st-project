@@ -11,18 +11,22 @@ router.get('/',(req,res)=>{
     res.status(200).send('GET:/게시글확인')
 })
 
+// router.post('/',(req,res)=>{
+//     res.status(200).send('게시글 작성')
+// })
+
 
 router.get('/:id',(req,res)=>{
-    res.status(201).send('GET:/게시글 내용확인')
+    res.status(201).send('게시글 내용확인')
 })
 
 
 router.put('/:id',(req,res)=>{
-    res.status(201).send('PUT:/users/:id 게시글수정')
+    res.status(201).send('게시글수정')
 })
 
 router.delete('/:id',(req,res)=>{
-    res.status(201).send('DELETE:/users/:id 게시글삭제')
+    res.status(201).send('게시글삭제')
 })
 
 export default router

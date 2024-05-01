@@ -8,12 +8,16 @@ router.use((req,res,next)=>{
 })
 
 router.get('/',(req,res)=>{
-    res.status(200).send('GET:/회원정보 확인')
+    res.status(200).send('회원정보 확인')
+})
+
+router.post('/',(req,res)=>{
+    res.status(201).send('회원가입')
 })
 
 
 router.put('/',(req,res)=>{
-    res.status(201).send('POST:/회원정보 수정')
+    res.status(201).send('회원정보 수정')
 })
 
 
