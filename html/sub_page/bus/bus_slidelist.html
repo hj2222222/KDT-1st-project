@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--글씨체-->
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+    <!--style-->
+    <link rel="stylesheet" href="../../css/slick.css">
+    <link rel="stylesheet" href="../../css/slick-theme.css">
+    <link rel="stylesheet" href="../../css/main.css">
+
+
+    <!-- script libraries -->
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="../../js/jquery.fullPage.js"></script>
+    <script src="../../js/slick.js"></script>
+    <script src="./map.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="./google-apps-script.js"></script>
+
+    <style>  /* 앱 화면을 기준으로 개발 */
+        table {
+            max-width: 100%; /* 표의 최대 너비 설정 */
+            height: auto; /* 높이 자동 조절 */
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            width: calc(100% / 7); /* 각 셀의 너비 동적 계산 */
+            height: calc(100% / 2); /* 각 셀의 높이 동적 계산 */
+            text-align: center;
+        }
+
+        
+        body{
+            min-width: 375px;
+            height: 100%;
+        }
+        #fullpage{
+            padding-bottom: 40px;
+            height: 100%;
+        }
+
+        #wrapper {
+            height: 100%;
+        }
+
+        .search-container {
+            width: 90%;
+            display: block;
+            margin: 20px auto;
+            border-radius: 5px;
+        }
+
+        input#search-bar {
+            box-sizing: border-box;
+            margin: 0 auto;
+            width: 100%;
+            height: 40px;
+            padding: 0 10px;
+            font-size: 1rem;
+            border: 1px solid #a3a3a3;
+            outline: none;
+            border-radius: 10px;
+        }
+
+        .search-icon {
+            position: relative;
+            float: right;
+            width: 60px;
+            height: 60px;
+            top: -50px;
+            right: -13px;
+        }
+
+
+        .container_bus {
+            margin: 0 auto;
+            /* min-width: 375px; */
+            width : 90%;
+            height: 100%;
+            background-color: white;  /*색 골라야함*/
+            border-radius: 10px;
+            /* margin-bottom: 30px; */
+        }
+
+        .toptext {
+            text-align: center;
+        }
+
+        .title > h3 {
+            clear: both;
+            font-size: 30px;
+            color: white;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .bustext {
+            text-align: center;
+            padding: 20px;
+            padding-bottom: 0;
+            font-size: 15px;
+            margin-bottom: 20px;
+            color: #5271FF;
+        }
+
+        .bus {
+            display: block;
+            justify-content: center;
+            flex: 0 0 40%;;
+            margin: 0 auto;
+            font-size: 10px;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: white;
+            border: 1px solid rgb(141, 136, 136);
+            border-radius: 10px;
+            box-shadow: 0 0 3px rgba(15, 15, 16, 0.5);
+            width: 90%;
+            padding-bottom: 10px;
+        }
+
+        .smalllibrary {
+            margin-left: 7px;
+        }
+
+        .toggle-button {
+            margin-top: 10px;
+            font-size: 10px;
+            cursor: pointer;
+            width: 98%;
+            margin-right: 7px;
+            background-color: #d4d5db;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 3%;
+        }
+
+        .map-container {
+            width: 100%;
+            margin: 0 auto;
+            border: 0.5px solid black;
+        }
+
+        .map-container > iframe {
+            width: 100%;
+        }
+
+        #number-list{
+            width: 80%;
+            height: 70px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* #number-list>div>div{
+            text-align: center;
+            border: none;
+        }
+
+        .number-list>div{
+            height: 50px;
+        } */
+        .number-lists{
+            /* height: 50px; */
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 50%;
+        }
+        .number-list{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30%;
+            list-style: none;
+            padding: 0;
+        }
+        #number-list>div>div>div:hover{
+            cursor: pointer;
+            color: blue;
+            font-weight: bold;
+        }
+        div.move{
+            line-height: 3;
+        }
+        div.move:hover{
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /*태블릿 이상 커졌을 때 반응형은 밑에서 수정!*/
+         @media screen and (min-width: 768px) {
+            #fullpage {
+            /* background-color: yellow; */
+            width: 90%;
+            margin: 0 auto;
+            padding-top: 100px;
+            height: 800px;
+        }
+        
+        .container_library{
+            width: 100%;
+            max-width: 600px;
+            background-color: white;
+            margin:0 auto;
+            height: auto;
+        }
+
+        .search-container{
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .map-container {
+            width: 100%;
+        }
+
+        .map-container > iframe {
+            width: 100%;
+            height: 500px;
+        }
+    
+    }    
+    </style>
+
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <!--header_wrap-->
+        <div id="header_wrap">
+            <div class="header_content">
+
+                <!--header-->
+                <header>
+                    <img src="../../img/화살표_왼쪽.png" alt="">
+                    <h1><a href="../../index.html">SaveMore</a></h1>
+
+                    <!--nav-->
+                    <div class="drawer_menu">
+                        <div class="smallmenu"></div>
+                    </div>
+                    <nav>
+                        <div class="xmenu"></div>
+                        <ul>
+                            <div class="btn_warp"><button onclick="window.location.href='../member/member_info.html'" class="btn_info">회원정보</button>
+                                <button onclick="window.location.href='../member/post_mine.html'" class="btn_my">내가쓴글</button>
+                                <button onclick="window.location.href='../main/login.html'" class="btn_login">로그인</button></div>
+                            </li>
+                            <li class="page1"><a href="../facility/librarycategory.html">편의시설</a></li>
+                            <li class="page2"><a href="../culture/culture_choice.html">문화생활</a></li>
+                            <li class="page3"><a href="../comunity/price_choice.html">물가소식</a></li>
+                            <li class="page4"><a href="#page4">셔틀버스</a></li>
+                        </ul>
+                    </nav>
+                </header>
+            </div>
+        </div>
+
+        <!-- 메뉴스크립트 -->
+        <script>
+            $(document).ready(function () {
+                var mBtn = $(".smallmenu");
+                var closeBtn = $(".xmenu");
+
+                // 버튼 클릭 이벤트
+                $(mBtn).click(function () {
+                    $("nav").css("right", "0");
+                    $(closeBtn).css("display", "block");
+                });
+
+                // 닫기 버튼 클릭 이벤트
+                $(closeBtn).click(function () {
+                    $("nav").css("right", "-100%");
+                    $(closeBtn).css("display", "none");
+                });
+                // nav 클릭 이벤트
+                $("nav").click(function () {
+                    $("nav").css("right", "-100%");
+                    $(closeBtn).css("display", "none");
+                });
+            });
+        </script>
+
+        <!--fullpage-->
+        <div id="fullpage">
+            <form class="search-container">
+                <input type="text" id="search-bar">
+                <!-- <a href="#"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a> -->
+            </form>
+          
+            <!--수정할 곳 container_(페이지이름)-->
+            <div class="title">
+                <h3>무료 셔틀버스 안내</h3>
+            </div>
+            <div class="container_bus">
+                <div class="bustext"><h4 class="toptext">편의 시설</h4></div>
+                <div class="item">
+                    <div class="bus">
+                        <div class="smallbus">
+                            <p>무료 셔틀버스</p><br>
+                            <h4>강남 세움 센터</h4><br>
+                            <button class="toggle-button">▼</button>
+                        </div>
+                        <div class="accordion-content">
+                            <table>
+                                <tr>
+                                  <th>bus_num</th>
+                                  <th>seq_num</th>
+                                  <th>time1</th>
+                                  <th>time2</th>
+                                  <th>time3</th>
+                                  <th>time4</th>
+                                  <th>time5</th>
+                                </tr>
+                                <tr>
+                                  <td>1</td>
+                                  <td>2</td>
+                                  <td>오전 8:20:00</td>
+                                  <td>오전 11:00:00</td>
+                                  <td>오후 2:30:00</td>
+                                  <td>none</td>
+                                  <td>none</td>
+                                </tr>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="bus">
+                        <div class="smallbus">
+                            <p>무료 셔틀버스</p><br>
+                            <h4>강남 세움 센터</h4><br>
+                            <button class="toggle-button">▼</button>
+                        </div>
+                        <div class="accordion-content">
+                            <table>
+                                <tr>
+                                  <th>bus_num</th>
+                                  <th>seq_num</th>
+                                  <th>time1</th>
+                                  <th>time2</th>
+                                  <th>time3</th>
+                                  <th>time4</th>
+                                  <th>time5</th>
+                                </tr>
+                                <tr>
+                                  <td>1</td>
+                                  <td>2</td>
+                                  <td>오전 8:20:00</td>
+                                  <td>오전 11:00:00</td>
+                                  <td>오후 2:30:00</td>
+                                  <td>none</td>
+                                  <td>none</td>
+                                </tr>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="bus">
+                        <div class="smallbus">
+                            <p>무료 셔틀버스</p><br>
+                            <h4>강남 세움 센터</h4><br>
+                            <button class="toggle-button">▼</button>
+                        </div>
+                        <div class="accordion-content">
+                            <table>
+                                <tr>
+                                  <th>bus_num</th>
+                                  <th>seq_num</th>
+                                  <th>time1</th>
+                                  <th>time2</th>
+                                  <th>time3</th>
+                                  <th>time4</th>
+                                  <th>time5</th>
+                                </tr>
+                                <tr>
+                                  <td>1</td>
+                                  <td>2</td>
+                                  <td>오전 8:20:00</td>
+                                  <td>오전 11:00:00</td>
+                                  <td>오후 2:30:00</td>
+                                  <td>none</td>
+                                  <td>none</td>
+                                </tr>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="bus">
+                        <div class="smallbus">
+                            <p>무료 셔틀버스</p><br>
+                            <h4>강남 세움 센터</h4><br>
+                            <button class="toggle-button">▼</button>
+                        </div>
+                        <div class="accordion-content">
+                            <table>
+                                <tr>
+                                  <th>bus_num</th>
+                                  <th>seq_num</th>
+                                  <th>time1</th>
+                                  <th>time2</th>
+                                  <th>time3</th>
+                                  <th>time4</th>
+                                  <th>time5</th>
+                                </tr>
+                                <tr>
+                                  <td>1</td>
+                                  <td>2</td>
+                                  <td>오전 8:20:00</td>
+                                  <td>오전 11:00:00</td>
+                                  <td>오후 2:30:00</td>
+                                  <td>none</td>
+                                  <td>none</td>
+                                </tr>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="bus">
+                        <div class="smallbus">
+                            <p>무료 셔틀버스</p><br>
+                            <h4>강남 세움 센터</h4><br>
+                            <button class="toggle-button">▼</button>
+                        </div>
+                        <div class="accordion-content">
+                            <table>
+                                <tr>
+                                  <th>bus_num</th>
+                                  <th>seq_num</th>
+                                  <th>time1</th>
+                                  <th>time2</th>
+                                  <th>time3</th>
+                                  <th>time4</th>
+                                  <th>time5</th>
+                                </tr>
+                                <tr>
+                                  <td>1</td>
+                                  <td>2</td>
+                                  <td>오전 8:20:00</td>
+                                  <td>오전 11:00:00</td>
+                                  <td>오후 2:30:00</td>
+                                  <td>none</td>
+                                  <td>none</td>
+                                </tr>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="bus">
+                        <div class="smallbus">
+                            <p>무료 셔틀버스</p><br>
+                            <h4>강남 세움 센터</h4><br>
+                            <button class="toggle-button">▼</button>
+                        </div>
+                        <div class="accordion-content">
+                            <table>
+                                <tr>
+                                  <th>bus_num</th>
+                                  <th>seq_num</th>
+                                  <th>time1</th>
+                                  <th>time2</th>
+                                  <th>time3</th>
+                                  <th>time4</th>
+                                  <th>time5</th>
+                                </tr>
+                                <tr>
+                                  <td>1</td>
+                                  <td>2</td>
+                                  <td>오전 8:20:00</td>
+                                  <td>오전 11:00:00</td>
+                                  <td>오후 2:30:00</td>
+                                  <td>none</td>
+                                  <td>none</td>
+                                </tr>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="bus">
+                        <div class="smallbus">
+                            <p>무료 셔틀버스</p><br>
+                            <h4>강남 세움 센터</h4><br>
+                            <button class="toggle-button">▼</button>
+                        </div>
+                        <div class="accordion-content">
+                            <table>
+                                <tr>
+                                  <th>bus_num</th>
+                                  <th>seq_num</th>
+                                  <th>time1</th>
+                                  <th>time2</th>
+                                  <th>time3</th>
+                                  <th>time4</th>
+                                  <th>time5</th>
+                                </tr>
+                                <tr>
+                                  <td>1</td>
+                                  <td>2</td>
+                                  <td>오전 8:20:00</td>
+                                  <td>오전 11:00:00</td>
+                                  <td>오후 2:30:00</td>
+                                  <td>none</td>
+                                  <td>none</td>
+                                </tr>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="bus">
+                        <div class="smallbus">
+                            <p>무료 셔틀버스</p><br>
+                            <h4>강남 세움 센터</h4><br>
+                            <button class="toggle-button">▼</button>
+                        </div>
+                        <div class="accordion-content">
+                            <table>
+                                <tr>
+                                  <th>bus_num</th>
+                                  <th>seq_num</th>
+                                  <th>time1</th>
+                                  <th>time2</th>
+                                  <th>time3</th>
+                                  <th>time4</th>
+                                  <th>time5</th>
+                                </tr>
+                                <tr>
+                                  <td>1</td>
+                                  <td>2</td>
+                                  <td>오전 8:20:00</td>
+                                  <td>오전 11:00:00</td>
+                                  <td>오후 2:30:00</td>
+                                  <td>none</td>
+                                  <td>none</td>
+                                </tr>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="bus">
+                        <div class="smallbus">
+                            <p>무료 셔틀버스</p><br>
+                            <h4>강남 세움 센터</h4><br>
+                            <button class="toggle-button">▼</button>
+                        </div>
+                        <div class="accordion-content">
+                            <table>
+                                <tr>
+                                  <th>bus_num</th>
+                                  <th>seq_num</th>
+                                  <th>time1</th>
+                                  <th>time2</th>
+                                  <th>time3</th>
+                                  <th>time4</th>
+                                  <th>time5</th>
+                                </tr>
+                                <tr>
+                                  <td>1</td>
+                                  <td>2</td>
+                                  <td>오전 8:20:00</td>
+                                  <td>오전 11:00:00</td>
+                                  <td>오후 2:30:00</td>
+                                  <td>none</td>
+                                  <td>none</td>
+                                </tr>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="bus">
+                        <div class="smallbus">
+                            <p>무료 셔틀버스</p><br>
+                            <h4>강남 세움 센터</h4><br>
+                            <button class="toggle-button">▼</button>
+                        </div>
+                        <div class="accordion-content">
+                            <table>
+                                <tr>
+                                  <th>bus_num</th>
+                                  <th>seq_num</th>
+                                  <th>time1</th>
+                                  <th>time2</th>
+                                  <th>time3</th>
+                                  <th>time4</th>
+                                  <th>time5</th>
+                                </tr>
+                                <tr>
+                                  <td>1</td>
+                                  <td>2</td>
+                                  <td>오전 8:20:00</td>
+                                  <td>오전 11:00:00</td>
+                                  <td>오후 2:30:00</td>
+                                  <td>none</td>
+                                  <td>none</td>
+                                </tr>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    document.querySelectorAll('.toggle-button').forEach(button => {
+                            button.addEventListener('click', () => {
+                                const accordionContent = button.parentElement.nextElementSibling;
+                
+                                button.classList.toggle('active');
+                                if (button.classList.contains('active')) {
+                                    button.textContent = '▲';
+                                    accordionContent.style.display = 'block';
+                                } else {
+                                    button.textContent = '▼';
+                                    accordionContent.style.display = 'none';
+                                }
+                            });
+                        });
+                </script>
+
+                <div id="library-list"></div>
+                    <div id="number-list">
+                        <div class="number-lists">
+                            <div onclick="page_minus()" class="move" id="back">&lt;</div>
+                            <div class="number-list">
+                                <div onclick="paging(this.innerText,bigPage)">1</div>
+                                <div onclick="paging(this.innerText,bigPage)">2</div>
+                                <div onclick="paging(this.innerText,bigPage)">3</div>
+                                <div onclick="paging(this.innerText,bigPage)">4</div>
+                                <div onclick="paging(this.innerText,bigPage)">5</div>
+                            </div>
+                            <div onclick="page_plus()" class="move" id="front">&gt;</div>
+                        </div>
+                    </div>  
+            </div>
+        </div>
+
+        <!-- <footer>
+            <div>
+                ⓒ COPYLIGHT 2024 BY MONEY FORCE GROP
+            </div>
+        </footer> -->
+
+</body>
+
+</html>

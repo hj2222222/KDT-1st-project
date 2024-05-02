@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--글씨체-->
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+    <!--style-->
+    <link rel="stylesheet" href="../../css/slick.css">
+    <link rel="stylesheet" href="../../css/slick-theme.css">
+    <link rel="stylesheet" href="../../css/main.css">
+
+
+    <!-- script libraries -->
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="../../js/jquery.fullPage.js"></script>
+    <script src="../../js/slick.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="./google-apps-script.js"></script>
+
+    <style>  /* 앱 화면을 기준으로 개발 */
+
+        body{
+            min-width: 375px;
+            height: 100%;
+        }
+        #fullpage{
+            padding-bottom: 40px;
+            height: 100%;
+        }
+
+        #wrapper {
+            height: 100%;
+        }
+        .container_lecture_cyber_choise {
+            margin: 0 auto;
+            /* min-width: 375px; */
+            width : 90%;
+            height: 100%;
+            background-color: white;  /*색 골라야함*/
+            border-radius: 10px;
+            /* margin-bottom: 30px; */
+        }
+        
+        .cychotitle {
+            text-align: center;
+            padding: 20px;
+            
+        }
+
+        h3 {
+            font-size: 30px;
+            color: white;
+        }
+
+        .cychotext {
+            text-align: center;
+            padding: 20px;
+            padding-bottom: 0;
+            font-size: 15px;
+            margin-bottom: 10px;
+            color: #5271FF;
+        }
+
+        .cychocategory {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding-bottom: 10px;
+            }
+
+        .cychocategory > button {
+            flex: 0 0 40%;;
+            margin: 7px;
+            font-size: 15px;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: white;
+            border: 1px solid rgb(141, 136, 136);
+            border-radius: 10px;
+            box-shadow: 0 0 3px rgba(15, 15, 16, 0.5);
+        }
+
+        .cychocategory > button:hover {
+            background-color: #5271FF;
+            color: white;
+        }
+
+        footer {
+            display: none;
+        }
+
+
+        /*태블릿 이상 커졌을 때 반응형은 밑에서 수정!*/
+         @media screen and (min-width: 768px) {
+            #fullpage {
+            /* background-color: yellow; */
+            width: 90%;
+            margin: 0 auto;
+            padding-top: 100px;
+            height: 800px;
+        }
+        .container_lecture_cyber_choise {
+            width: 70%;
+            max-width: 600px;
+            background-color: white;
+            margin:0 auto;
+            height: auto;
+        }
+
+        .cychocategory > button {
+            margin: 3%;
+            padding: 4%;
+            font-size: 20px;
+        }
+
+        footer {
+            display: block;
+        }
+    
+    }    
+    </style>
+
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <!--header_wrap-->
+        <div id="header_wrap">
+            <div class="header_content">
+
+                <!--header-->
+                <header>
+                    <img src="../img/화살표_왼쪽.png" alt="">
+                    <h1><a href="login.html">SaveMore</a></h1>
+
+                    <!--nav-->
+                    <div class="drawer_menu">
+                        <div class="smallmenu"></div>
+                    </div>
+                    <nav>
+                        <div class="xmenu"></div>
+                        <ul>
+                            <li class="mine">
+                                <h3>Money Force</h3>
+                                <div class="btn_warp"><button class="btn_info">회원정보</button><button
+                                        class="btn_my">내가쓴글</button></div>
+                            </li>
+                            <li class="page1"><a href="#page1">편의시설</a></li>
+                            <li class="page2"><a href="#page2">문화생활</a></li>
+                            <li class="page3"><a href="#page3">물가소식</a></li>
+                            <li class="page4"><a href="#page4">셔틀버스</a></li>
+                        </ul>
+                    </nav>
+                </header>
+            </div>
+        </div>
+
+        <!-- 메뉴스크립트 -->
+        <script>
+            $(document).ready(function () {
+                var mBtn = $(".smallmenu");
+                var closeBtn = $(".xmenu");
+
+                // 버튼 클릭 이벤트
+                $(mBtn).click(function () {
+                    $("nav").css("right", "0");
+                    $(closeBtn).css("display", "block");
+                });
+
+                // 닫기 버튼 클릭 이벤트
+                $(closeBtn).click(function () {
+                    $("nav").css("right", "-100%");
+                    $(closeBtn).css("display", "none");
+                });
+                // nav 클릭 이벤트
+                $("nav").click(function () {
+                    $("nav").css("right", "-100%");
+                    $(closeBtn).css("display", "none");
+                });
+            });
+        </script>
+
+        <!--fullpage-->
+        <div id="fullpage">
+            <!--수정할 곳 container_(페이지이름)-->
+            <div class="cychotitle"><h3>사이버 강의</h3></div>
+            <div class="container_lecture_cyber_choise">
+                <div class="cychotext"><h4>분류 선택</h4></div>
+                <section class="cychocategory">
+                    <button onclick="window.location.href='lecture_cyber_list.html'">직업상담사</button>
+                    <button>전문기술과정</button>
+                    <button>리더십/인사조직</button>
+                    <button>셀프브랜딩</button>
+                    <button>공인중개사</button>
+                    <button>주택관리사</button>
+                    <button>인권</button>
+                    <button>인문학</button>
+                    <button>창업과정</button>
+                    <button>웹툰/이모티콘</button>
+                    <button>직무역량과정</button>
+                    <button>방송/영상</button>
+                    <button>부모교육</button>
+                    <button>국가기술자격</button>
+                    <button>사회/교양</button>
+                    <button>콘텐츠산업 전문과정</button>
+                    <button>사회복지사</button>
+                    <button>경영일반</button>
+                    <button>금융/회계</button>
+                    <button>영어</button>
+                    <button>건강관리</button>
+                    <button>OA활용</button>
+                    <button>일본어</button>
+                    <button>중국어</button>
+                    <button>기타외국어</button>
+                    <button>아동/청소년</button>
+                    <button>신기술교육</button>
+                    <button>문화예술</button>
+                    <button>프로그래밍</button>
+                    <button>금융</button>
+                    <button>창업</button>
+                    <button>공인중개사 연수교육</button>
+                    <button>인공지능</button>
+                    <button>AR/VR</button>
+                    <button>취업</button>
+                    <button>시니어취업</button>
+                    <button>취미생활</button>
+                    <button>멀티미디어</button>
+                    <button>국가공인민간자격</button>
+                    <button>소셜미디어</button>
+                    <button>기타</button>
+                </section>
+            </div>
+        </div>
+
+        <!-- <footer>
+            <div>
+                ⓒ COPYLIGHT 2024 BY MONEY FORCE GROP
+            </div>
+        </footer> -->
+
+</body>
+
+</html>
