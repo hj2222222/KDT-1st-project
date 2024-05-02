@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./regist.js"></script>
+    <style>
+
+        body {
+            height: 1000PX;
+            font-family: pretendard;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(255, 255, 255);
+        }
+
+        a {
+            text-decoration: none;
+            color: #222;
+            cursor: pointer;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        .container {
+            position: relative;
+            width: 360px;
+            height: 700px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            overflow: auto;
+        }
+        img{
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 30px;
+        }
+
+        .wrap {
+            width: 80%;
+            margin: 0 auto;
+
+        }
+
+        #team-name {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            color: #5271ff;
+        }
+
+
+        h4{
+            font-size: 15px;
+            font-weight: 200;
+            margin-bottom: 6px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #969696;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 12px;
+            margin-bottom: -3px;
+        }
+
+        span {
+            padding: 5px;
+        }
+
+        #btn1{
+            margin-left: 5px;
+            width: 100px;
+            height: 35px;
+            line-height: 30px;
+            background-color: #5271ff;
+            color: white;
+            transition: all 0.5s ease;
+            border-radius: 5%;
+            border: 1px solid #5271ff;
+            cursor: pointer;
+        }
+
+        #btn2{
+            margin-left: 5px;
+            width: 100px;
+            height: 35px;
+            line-height: 30px;
+            background-color: #5271ff;
+            color: white;
+            transition: all 0.5s ease;
+            border-radius: 5%;
+            border: 1px solid #5271ff;
+            cursor: pointer;
+        }
+
+        #date {
+            width: 100%;
+        }
+
+        form p {
+            margin-top: 15px;
+        }
+
+        select{
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #969696;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 12px;
+            margin-bottom: -3px;
+        }
+        #nickname, #hp{
+            width: 60%;
+        }
+
+        #ssn1, #ssn2{
+            width: 45%;
+        }
+
+        .box1, .box2 {
+            display: inline-block;
+            width:45%;
+            font-size: 15px;
+            font-weight: 200;
+            margin-bottom: 6px;
+        }
+        .box1{
+            margin-right: 20px ;
+        }
+
+        #btn3{
+            margin-top: 10px;
+            width: 100%;
+            height: 35px;
+            line-height: 30px;
+            background-color: #5271ff;
+            color: white;
+            font-weight: 600;
+            transition: all 0.5s ease;
+            border-radius: 5px;
+            border: 1px solid #5271ff;
+            cursor: pointer;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="#"><img src="./img/화살표_왼쪽.png" alt="왼쪽 화살표"></a><a href="#"><p id="team-name">Save More</p></a>
+        <div class="wrap">
+            <form action="./regist.js" method="post" id="regform" name="regform" onsubmit="return sendit()">
+               
+                <h4>이름</h4>
+                <input type="text" id="name" name="name" placeholder="이름을 입력해주세요">
+                <h4>아이디</h4>
+                <input type="text" id="userid" name="userid" placeholder="아이디를 입력해주세요">
+                <h4>비밀번호</h4>
+                <input type="password" id="userpw" name="userpw" placeholder="비밀번호를 입력해주세요">
+                <h4>비밀번호 재확인</h4>
+                <input type="password" id="re_userpw" name="re_userpw" placeholder="비밀번호를 한번더 입력해주세요">
+                <h4>닉네임</h4>
+                <input type="text" id="nickname" name="nickname" placeholder="닉네임을 입력해주세요"><button id="btn1">중복확인</button>
+                
+                <h4>본인 확인 이메일</h4>
+                <input type="email" name="email" id="email" placeholder="이메일을 입력해주세요">
+                <h4>주민등록번호</h4>
+                <input type="text" id="ssn1" name="ssn1" maxlength="6" placeholder="주민등록번호 앞 6자리를 입력해주세요">
+                    <span>-</span>
+                    <input type="text" id="ssn2" name="ssn2" maxlength="1" placeholder="주민등록번호 뒤 첫번째 자리만 입력해주세요">
+                
+                <h4>생년월일</h4><form id="dateForm">
+                    <input type="date" id="year" onchange="submitForm()"></form> <br> <br>
+                <div class="box1">
+                        <p>성별</p> 
+                            <select name="gender" id="gender">
+                                <option value="male">남자</option>
+                                <option value="female">여자</option>
+                            </select>
+                        </div>
+                 <div class="box2">
+                        <p>소득분위</p>
+                            <select name="income" id="income">
+                                <option value="1">1분위</option>
+                                <option value="2">2분위</option>
+                                <option value="3">3분위</option>
+                                <option value="4">4분위</option>
+                                <option value="5">5분위</option>
+                                <option value="6">6분위</option>
+                                <option value="7">7분위</option>
+                                <option value="8">8분위</option>
+                                <option value="9">9분위</option>
+                            </select>
+                        </div>
+                <form id="phoneForm" onsubmit="return sendit();">
+                    <h4>휴대폰 번호</h4>
+                    <input type="text" name="hp" id="hp" placeholder="휴대폰 번호를 입력해주세요"><button id="btn2">인증확인</button></form>
+                <h4><button type="submit" id="btn3">가입하기</button></h4>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
