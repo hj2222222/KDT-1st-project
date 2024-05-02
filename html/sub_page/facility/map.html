@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=291c0031d5303797fc6e590328265969&libraries=services"
+    ></script>
+  </head>
+  <body>
+    <div id="map" style="width: 100%; height: 500px"></div>
+    <p id="result"></p>
+    <div id="clickLatlng"></div>
+    <div class="map_wrap">
+      <div class="hAddr">
+        <span id="centerAddr"></span>
+      </div>
+    </div>
+    <!-- <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=395405d82c286e5ec308a28960bf7f7e"
+    ></script> -->
+    <!-- <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=395405d82c286e5ec308a28960bf7f7e&libraries=LIBRARY"
+    ></script> -->
+    <script src="./map.js"></script>
+    <script>
+      var imageSrc =
+          "https://dau2wmhjxkxtx.cloudfront.net/web-static/static_webapp_v2/img/icons/location-red.svg", // 마커이미지의 주소입니다
+        imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+        imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+      // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+      var markerImage = new kakao.maps.MarkerImage(
+          imageSrc,
+          imageSize,
+          imageOption
+        )
+        // markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); // 마커가 표시될 위치입니다
+
+      // 마커를 생성합니다
+      var marker = new kakao.maps.Marker({
+        position: markerPosition,
+        image: markerImage, // 마커이미지 설정
+      });
+
+      // 마커가 지도 위에 표시되도록 설정합니다
+      marker.setMap(map);
+    </script>
+
+    <script>
+      // 주소로 좌표를 검색합니다
+      geocoder.addressSearch(
+        "고색로 8",
+        // 받아온 식당주소 입력
+        function (result, status) {
+          // 정상적으로 검색이 완료됐으면
+          if (status === kakao.maps.services.Status.OK) {
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            var marker = new kakao.maps.Marker({
+              map: map,
+              position: coords,
+              image: markerImage,
+            });
+
+            // 인포윈도우로 장소에 대한 설명을 표시합니다
+            // var infowindow = new kakao.maps.InfoWindow({
+            //   content:
+            //     '<div style="width:150px;text-align:center;padding:6px 0; border-radius: 10px; background-color: #5271FF; color: white">학원</div>',
+            // });
+            // infowindow.open(map, marker);
+
+            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+            map.setCenter(coords);
+          }
+        }
+      );
+    </script>
+  </body>
+</html>
