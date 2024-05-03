@@ -138,7 +138,7 @@
 
                 <!--header-->
                 <header>
-                    <img src="../../img/화살표_왼쪽.png" alt="">
+                    <img src="../../img/화살표_왼쪽.png" alt="뒤로 가기" id="backButton">
                     <h1><a href="../../index.html">SaveMore</a></h1>
 
                     <!--nav-->
@@ -150,14 +150,16 @@
                         <ul>
                             <li class="mine">
                                 <h3>Money Force</h3>
-                                <div class="btn_warp"><button onclick="window.location.href='../member/member_info.html'"  class="btn_info">회원정보</button>
-                                    <button  onclick="window.location.href='../member/post_mine.html'"class="btn_my">내가쓴글</button>
-                                    <button onclick="window.location.href='../main/login.html'" class="btn_login">로그인</button></div></li>
-                                    <li class="page1"><a href="../facility/facility_category.html">편의시설</a></li>
-                                    <li class="page2"><a href="../culture/culturechoice.html">문화생활</a></li>
-                                    <li class="page3"><a href="../comunity/price_choice.html">물가소식</a></li>
-                                    <li class="page4"><a href="#page4">셔틀버스</a></li>
-                                </ul>
+                                <div class="btn_warp"><button onclick="window.location.href='../member/member_info.html'" class="btn_info">회원정보</button>
+                                    <button onclick="window.location.href='../member/post_mine.html'" class="btn_my">내가쓴글</button>
+                                    <button onclick="window.location.href='../main/login.html'" class="btn_login">로그인</button></div>
+                            </li>
+                            <li class="page1"><a href="facility_category.html">편의시설</a></li>
+                            <li class="page2"><a href="../lecture/lecture_category.html">무료강의</a></li>
+                            <li class="page2"><a href="../culture/culture_choice.html">문화생활</a></li>
+                            <li class="page3"><a href="../price/price_choice.html">물가소식</a></li>
+                            <li class="page4"><a href="../bus/bus_guchoice.html">셔틀버스</a></li>
+                        </ul>
                     </nav>
                 </header>
             </div>
@@ -188,10 +190,18 @@
             });
         </script>
 
+        <!--뒤로가기 스크립트 -->
+        <script>
+            document.getElementById('backButton').addEventListener('click', function() {
+              window.history.back(); // 뒤로 가는 기능을 수행합니다.
+            });
+          </script>
+
+
         <!--fullpage-->
         <div id="fullpage">
             <!--수정할 곳 container_(페이지이름)-->
-            <div class="title"><h3>직업 소개소</h3></div>
+            <div class="title"><h3>공공 도서관</h3></div>
             <div class="container_amenity_jobagency_guchoice">
                 <div class="amgutext"><h4>구 선택</h4></div>
                 <section class="amgucategory">

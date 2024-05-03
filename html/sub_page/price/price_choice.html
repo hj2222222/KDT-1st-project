@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,72 +37,110 @@
             height: 100%;
         }
 
-        .container_com_che {
-            margin: 50% auto;
+        .container_pri_choice {
+            margin: 10% auto;
             /* min-width: 375px; */
             width : 90%;
-            height: 180px;
-            /*max-width: 500px;
-            max-height: 300px; */
+            height: 100%;
             background-color: white;  /*색 골라야함*/
             border-radius: 10px;
             /* margin-bottom: 30px; */
         }
-
-        h3 {
-            font-size: 20px;
-            color: rgb(0, 0, 0);
-            text-align: center;
-            margin: 0 auto;
-            padding: 50px 0 15px 0;
-            width: 100%;
-            font-weight: 500;
-        }
-
-        #btn1 {
-            display: block;
-            width: 50%;
-            height: 35px;
-            background-color: #5271ff;
-            color: white;
-            font-weight: 600;
-            border-radius: 5px;
-            border: 1px solid #5271ff;
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.5s ease;
-            margin: 20px auto;
-        }
         
-        #btn1:hover {
-            background-color: white;
-            color: #5271FF;
-            font-weight: 800;
+        /* 글씨 */
+        .title_text{
+            margin: 20px auto 20px;
+            color: white;
+            font-size: 20px;
         }
+        .pop_text {
+            color: #5271FF;
+            font-size: 15px;
+            padding: 30px 0px 20px 0px;
+            text-align: center;
+        }
+
+
+        .price_category {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: left;
+            margin-left: 10%;
+            padding-bottom: 50px;
+            }
+
+        .price_category > button {
+            flex: 0 0 40%;;
+            margin: 7px;
+            font-size: 14px;
+            margin-top: 25px;
+            padding: 15px;
+            background-color: white;
+            border: 1px solid rgb(141, 136, 136);
+            border-radius: 10px;
+            box-shadow: 0 0 3px rgba(15, 15, 16, 0.5);
+            cursor: pointer;
+            transition: all 0.5s ease;
+            line-height : 1.5;
+        }
+
+        .price_category > button:hover {
+            background-color: #5271FF;
+            color: white;
+        }
+
+        footer {
+            display: none;
+        }
+
 
         /*태블릿 이상 커졌을 때 반응형은 밑에서 수정!*/
          @media screen and (min-width: 768px) {
-        #fullpage {
+            #fullpage {
             /* background-color: yellow; */
             width: 90%;
             margin: 0 auto;
             padding-top: 100px;
+            height: auto;
         }
-        .container_com_che {
-            max-width: 30%;
+        .container_pri_choice {
             width: 70%;
-            height: 200px;
+            max-width: 700px;
             background-color: white;
-            margin: 20% auto;
+            margin: 0 auto;
+            height: auto;
         }
-        h3 {
+        
+        /*글씨크기*/
+        .title_text{
+            color: white;
+            font-size: 25px;
+            padding: 40px 0px 30px 0px;
+            margin-right: 20px;
+
+        }
+        .pop_text {
+            color: #5271FF;
             font-size: 20px;
-            padding: 60px 0 15px 0;
+            padding: 40px 0px 20px 0px;
+            margin-right: 20px;
+            text-align: center;
+        }        
+
+        .price_category > button {
+            margin: 2%;
+            padding: 3%;
+            font-size: 18px;
+            margin-top: 40px;
         }
+
+
 
         footer {
             display: block;
         }
+
+
     
     }    
     </style>
@@ -136,7 +175,7 @@
                             <li class="page1"><a href="../facility/facility_category.html">편의시설</a></li>
                             <li class="page2"><a href="../lecture/lecture_category.html">무료강의</a></li>
                             <li class="page2"><a href="../culture/culture_choice.html">문화생활</a></li>
-                            <li class="page3"><a href="../price/price_choice.html">물가소식</a></li>
+                            <li class="page3"><a href="price_choice.html">물가소식</a></li>
                             <li class="page4"><a href="../bus/bus_guchoice.html">셔틀버스</a></li>
                         </ul>
                     </nav>
@@ -176,13 +215,17 @@
             });
           </script>
 
-
         <!--fullpage-->
         <div id="fullpage">
             <!--수정할 곳 container_(페이지이름)-->
-            <div class="container_com_che">
-                <h3>수정되었습니다</h3>
-               <button onclick="window.location.href='post_mine.html'" type="submit" id="btn1">확인</button>
+                <h2 class="title_text">물가소식</h2>
+            <div class="container_pri_choice ">
+                <div class="pop_text"><h3>분류 선택</h3></div>
+                <section class="price_category">
+                    <button onclick="window.location.href='./comunity/comunity_main.html'">물가정보 <br>커뮤니티</button>
+                    <button onclick="window.location.href='news.html'">물가소식<br> 게시판</button>
+                    <button onclick="window.location.href='events.html'">할인행사 <br> 직거래 장터</button>
+                </section>
             </div>
         </div>
 
