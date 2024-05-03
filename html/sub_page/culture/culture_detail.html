@@ -141,7 +141,7 @@
             <!--수정할 곳 container_(페이지이름)-->
             <div class="container_event">
                 <div class="div">
-                    <div class="text-wrapper">문화 전시회 안내</div>
+                    <div class="text-wrapper">문화행사 안내</div>
                     <div class="overlap">
                         <img class="image" src="../img/event.png" />
                     </div>
@@ -289,7 +289,37 @@
                 </div>       
             </div>
         </div>
-        </script>
 </body>
+<script>
+    const key = '6265704e6d6c686a373970714a4862'
+    // 현재 페이지의 URL 가져오기
+    const url = window.location.href;
 
+    // URL에서 파라미터 부분만 추출하기
+    const category = new URLSearchParams(url.split('?')[1]).get('category');
+    const title = new URLSearchParams(url.split('?')[2]).get('title'); // '?' 이후의 부분을 추출
+    // 추출한 파라미터 문자열을 URLSearchParams 객체로 변환
+
+    // 가져온 파라미터 값 콘솔에 출력 (테스트용)
+    console.log(category);
+    console.log(title.split(' ')[0]);
+    console.log(`http://openapi.seoul.go.kr:8088/${key}/json/culturalEventInfo/1/50/${category}/${title.split(' ')[0].replace('[','').replace(']','')}`)        
+    fetch(`http://openapi.seoul.go.kr:8088/${key}/json/culturalEventInfo/1/50/${category}/${title.split(' ')[0]}`)
+    .then((response)=>{
+        return response.json()
+    })
+    .then((data)=>{
+        console.log(data)
+        let codename = data.culturalEventInfo.row[0]['CODENAME']
+        let date = data.culturalEventInfo.row[0]['DATE']
+        let guname = data.culturalEventInfo.row[0]['GUNAME']
+        let isfree = data.culturalEventInfo.row[0]['IS_FREE']
+        let place = data.culturalEventInfo.row[0]['PLACE']
+        let title = data.culturalEventInfo.row[0]['TITLE']
+        let usefee = data.culturalEventInfo.row[0]['USE_FEE']
+        let target = data.culturalEventInfo.row[0]['USE_TRGT']
+        let link = data.culturalEventInfo.row[0]['HMPG_ADDR']
+        let img = data.culturalEventInfo.row[0]['MAIN_IMG']
+        })
+</script>
 </html>
