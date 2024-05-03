@@ -170,7 +170,7 @@
 
                 <!--header-->
                 <header>
-                    <img src="../../img/화살표_왼쪽.png" alt="뒤로 가기" id="backButton">
+                    <img src="../../img/화살표_왼쪽.png" alt="뒤로 가기" id="backButton" onclick="window.history.back()">
                     <h1><a href="../../index.html">SaveMore</a></h1>
 
                     <!--nav-->
@@ -227,7 +227,7 @@
             document.getElementById('backButton').addEventListener('click', function() {
               window.history.back(); // 뒤로 가는 기능을 수행합니다.
             });
-          </script>ㄴ
+          </script>
 
 
         <!--fullpage-->  
@@ -246,7 +246,7 @@
                         </div>
                         <button onclick="window.location.href='#'" type="submit" class="log_btn" >로그인</button>
                     <div class="signup-link">
-                        <div>회원이 아니신가요?</div> <div><a href="sub_page/member/agree_main.html">회원가입</a></div>
+                        <div>회원이 아니신가요?</div> <div><a href="../member/agree_main.html">회원가입</a></div>
                     </div>
                 </form>
                 </div>
