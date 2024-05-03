@@ -11,15 +11,15 @@
         href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 
     <!--style-->
-    <link rel="stylesheet" href="../../../css/slick.css">
-    <link rel="stylesheet" href="../../../css/slick-theme.css">
-    <link rel="stylesheet" href="../../../css/main.css">
+    <link rel="stylesheet" href="../../css/slick.css">
+    <link rel="stylesheet" href="../../css/slick-theme.css">
+    <link rel="stylesheet" href="../../css/main.css">
 
 
     <!-- script libraries -->
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-    <script src="../../../js/jquery.fullPage.js"></script>
-    <script src="../../../js/slick.js"></script>
+    <script src="../../js/jquery.fullPage.js"></script>
+    <script src="../../js/slick.js"></script>
 
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -160,21 +160,7 @@
             margin-left: -25px;
             grid-gap: 5px;
         }
-        
-        /* 인기글 */
-        .pop {
-            margin: 0 auto;
-            width: 90%;
-            /*display: flex;
-            justify-content: space-around;
-            margin-bottom: 20px;*/
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            /* 3개의 열을 동일한 너비로 설정 */
-            grid-gap: 5px;
-            /* 그리드 간격 설정 */
 
-        }
         .pop>button {
             /*display: inline-block;*/
             background-color: white;
@@ -497,8 +483,8 @@
 
                 <!--header-->
                 <header>
-                    <img src="../../../img/화살표_왼쪽.png" alt="뒤로 가기" id="backButton">
-                    <h1><a href="../../../index.html">SaveMore</a></h1>
+                    <img src="../../img/화살표_왼쪽.png" alt="뒤로 가기" id="backButton">
+                    <h1><a href="../../index.html">SaveMore</a></h1>
 
                     <!--nav-->
                     <div class="drawer_menu">
@@ -509,15 +495,19 @@
                         <ul>
                             <li class="mine">
                                 <h3>Money Force</h3>
-                                <div class="btn_warp"><button onclick="window.location.href='../../member/member_info.html'" class="btn_info">회원정보</button>
-                                    <button onclick="window.location.href='../../member/post_mine.html'" class="btn_my">내가쓴글</button>
-                                    <button onclick="window.location.href='../../main/login.html'" class="btn_login">로그인</button></div>
+                                <div class="btn_warp"><button
+                                        onclick="window.location.href='../member/member_info.html'"
+                                        class="btn_info">회원정보</button>
+                                    <button onclick="window.location.href='../member/post_mine.html'"
+                                        class="btn_my">내가쓴글</button>
+                                    <button onclick="window.location.href='../main/login.html'"
+                                        class="btn_login">로그인</button>
+                                </div>
                             </li>
-                            <li class="page1"><a href="../../facility/facility_category.html">편의시설</a></li>
-                            <li class="page2"><a href="../../lecture/lecture_category.html">무료강의</a></li>
-                            <li class="page2"><a href="../../culture/culture_choice.html">문화생활</a></li>
-                            <li class="page3"><a href="../price_choice.html">물가소식</a></li>
-                            <li class="page4"><a href="../../bus/bus_guchoice.html">셔틀버스</a></li>
+                            <li class="page1"><a href="../facility/facility_category.html">편의시설</a></li>
+                            <li class="page2"><a href="../culture/culture_choice.html">문화생활</a></li>
+                            <li class="page3"><a href="../comunity/price_choice.html">물가소식</a></li>
+                            <li class="page4"><a href="#page4">셔틀버스</a></li>
                         </ul>
                     </nav>
                 </header>

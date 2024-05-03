@@ -18,18 +18,13 @@
 
     <!-- script libraries -->
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-    <script src="../../js/jquery-3.6.0.min.js"></script>
     <script src="../../js/jquery.fullPage.js"></script>
     <script src="../../js/slick.js"></script>
-    <script
-    type="text/javascript"
-    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=291c0031d5303797fc6e590328265969&libraries=services"></script>
-    <script src="./maptest.js"></script>
-    
+    <script src="./map.js"></script>
+
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <!-- <script src="./google-apps-script.js"></script> -->
-    
+    <script src="./google-apps-script.js"></script>
 
     <style>  /* 앱 화면을 기준으로 개발 */
         body{
@@ -137,25 +132,22 @@
         }
 
         .accordion-content {
-            /* display: none; */
+            display: none;
             padding: 3%;
         }
 
         .map-container {
             width: 100%;
-            height: 300px;
             margin: 0 auto;
             border: 0.5px solid black;
         }
 
-        #map {
+        .map-container > iframe {
             width: 100%;
-            height: 300px;
         }
 
-
         #number-list{
-            width: 100%;
+            width: 80%;
             height: 70px;
             margin: 0 auto;
             display: flex;
@@ -163,19 +155,26 @@
             align-items: center;
         }
 
+        /* #number-list>div>div{
+            text-align: center;
+            border: none;
+        }
+
+        .number-list>div{
+            height: 50px;
+        } */
         .number-lists{
             /* height: 50px; */
             display: flex;
             justify-content: space-around;
             align-items: center;
             width: 50%;
-            padding: auto;
         }
         .number-list{
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20%;
+            gap: 30%;
             list-style: none;
             padding: 0;
         }
@@ -219,7 +218,7 @@
             width: 100%;
         }
 
-        .map-container > map {
+        .map-container > iframe {
             width: 100%;
             height: 500px;
         }
@@ -250,15 +249,14 @@
                         <ul>
                             <li class="mine">
                                 <h3>Money Force</h3>
-                                <div class="btn_warp"><button onclick="window.location.href='../member/member_info.html'" class="btn_info">회원정보</button>
-                                    <button onclick="window.location.href='../member/post_mine.html'" class="btn_my">내가쓴글</button>
+                                <div class="btn_warp"><button onclick="window.location.href='../member/member_info.html'"  class="btn_info">회원정보</button>
+                                    <button  onclick="window.location.href='../member/post_mine.html'" class="btn_my">내가쓴글</button>
                                     <button onclick="window.location.href='../main/login.html'" class="btn_login">로그인</button></div>
                             </li>
-                            <li class="page1"><a href="facility_category.html">편의시설</a></li>
-                            <li class="page2"><a href="../lecture/lecture_category.html">무료강의</a></li>
-                            <li class="page2"><a href="../culture/culture_choice.html">문화생활</a></li>
-                            <li class="page3"><a href="../price/price_choice.html">물가소식</a></li>
-                            <li class="page4"><a href="../bus/bus_guchoice.html">셔틀버스</a></li>
+                            <li class="page1"><a href="../facility/facility_category.html">편의시설</a></li>
+                            <li class="page2"><a href="../culture/culturechoice.html">문화생활</a></li>
+                            <li class="page3"><a href="../comunity/price_choice.html">물가소식</a></li>
+                            <li class="page4"><a href="#page4">셔틀버스</a></li>
                         </ul>
                     </nav>
                 </header>
@@ -297,6 +295,7 @@
             });
           </script>
 
+
         <!--fullpage-->
         <div id="fullpage">
             <form class="search-container">
@@ -325,9 +324,7 @@
                             <p>평일 : 09:00~18:00 / 주말 : 09:00~17:00</p>
                             <p>매주 화요일 및 법정 공휴일 휴무</p>
                             <div class="map-container">
-                                <div class="map-container">
-                                    <div id="map1" style="width: 100%; height: 300px"></div>
-                                </div>
+                                <iframe src="./map.html" style="width: 100%; border: none;"></iframe>
                             </div>
                         </div>
                     </div>
@@ -347,9 +344,7 @@
                             <p>평일 : 09:00~18:00 / 주말 : 09:00~17:00</p>
                             <p>매주 화요일 및 법정 공휴일 휴무</p>
                             <div class="map-container">
-                                <div class="map-container">
-                                    <div id="map2" style="width: 100%; height: 300px"></div>
-                                </div>
+                                <iframe src="./map.html" style="width: 100%; border: none;"></iframe>
                             </div>
                         </div>
                     </div>
@@ -369,9 +364,7 @@
                             <p>평일 : 09:00~18:00 / 주말 : 09:00~17:00</p>
                             <p>매주 화요일 및 법정 공휴일 휴무</p>
                             <div class="map-container">
-                                <div class="map-container">
-                                    <div id="map3" style="width: 100%; height: 300px"></div>
-                                </div>
+                                <iframe src="./map.html" style="width: 100%; border: none;"></iframe>
                             </div>
                         </div>
                     </div>
@@ -391,9 +384,7 @@
                             <p>평일 : 09:00~18:00 / 주말 : 09:00~17:00</p>
                             <p>매주 화요일 및 법정 공휴일 휴무</p>
                             <div class="map-container">
-                                <div class="map-container">
-                                    <div id="map4" style="width: 100%; height: 300px"></div>
-                                </div>
+                                <iframe src="./map.html" style="width: 100%; border: none;"></iframe>
                             </div>
                         </div>
                     </div>
@@ -413,9 +404,7 @@
                             <p>평일 : 09:00~18:00 / 주말 : 09:00~17:00</p>
                             <p>매주 화요일 및 법정 공휴일 휴무</p>
                             <div class="map-container">
-                                <div class="map-container">
-                                    <div id="map5" style="width: 100%; height: 300px"></div>
-                                </div>
+                                <iframe src="./map.html" style="width: 100%; border: none;"></iframe>
                             </div>
                         </div>
                     </div>
@@ -435,9 +424,7 @@
                             <p>평일 : 09:00~18:00 / 주말 : 09:00~17:00</p>
                             <p>매주 화요일 및 법정 공휴일 휴무</p>
                             <div class="map-container">
-                                <div class="map-container">
-                                    <div id="map6" style="width: 100%; height: 300px"></div>
-                                </div>
+                                <iframe src="./map.html" style="width: 100%; border: none;"></iframe>
                             </div>
                         </div>
                     </div>
@@ -457,9 +444,7 @@
                             <p>평일 : 09:00~18:00 / 주말 : 09:00~17:00</p>
                             <p>매주 화요일 및 법정 공휴일 휴무</p>
                             <div class="map-container">
-                                <div class="map-container">
-                                    <div id="map7" style="width: 100%; height: 300px"></div>
-                                </div>
+                                <iframe src="./map.html" style="width: 100%; border: none;"></iframe>
                             </div>
                         </div>
                     </div>
@@ -479,9 +464,7 @@
                             <p>평일 : 09:00~18:00 / 주말 : 09:00~17:00</p>
                             <p>매주 화요일 및 법정 공휴일 휴무</p>
                             <div class="map-container">
-                                <div class="map-container">
-                                    <div id="map8" style="width: 100%; height: 300px"></div>
-                                </div>
+                                <iframe src="./map.html" style="width: 100%; border: none;"></iframe>
                             </div>
                         </div>
                     </div>
@@ -501,9 +484,7 @@
                             <p>평일 : 09:00~18:00 / 주말 : 09:00~17:00</p>
                             <p>매주 화요일 및 법정 공휴일 휴무</p>
                             <div class="map-container">
-                                <div class="map-container">
-                                    <div id="map9" style="width: 100%; height: 300px"></div>
-                                </div>
+                                <iframe src="./map.html" style="width: 100%; border: none;"></iframe>
                             </div>
                         </div>
                     </div>
@@ -523,9 +504,7 @@
                             <p>평일 : 09:00~18:00 / 주말 : 09:00~17:00</p>
                             <p>매주 화요일 및 법정 공휴일 휴무</p>
                             <div class="map-container">
-                                <div class="map-container">
-                                    <div id="map10" style="width: 100%; height: 300px"></div>
-                                </div>
+                                <iframe src="./map.html" style="width: 100%; border: none;"></iframe>
                             </div>
                         </div>
                     </div>
@@ -545,9 +524,9 @@
                                 }
                             });
                         });
-                    </script>
+                </script>
 
-                <div id="culture-list"></div>
+                <div id="library-list"></div>
                     <div id="number-list">
                         <div class="number-lists">
                             <div onclick="page_minus()" class="move" id="back">&lt;</div>
@@ -560,8 +539,16 @@
                             </div>
                             <div onclick="page_plus()" class="move" id="front">&gt;</div>
                         </div>
-                    </div>
-                </div>
+                    </div>  
             </div>
-</body> 
+        </div>
+
+        <!-- <footer>
+            <div>
+                ⓒ COPYLIGHT 2024 BY MONEY FORCE GROP
+            </div>
+        </footer> -->
+
+</body>
+
 </html>
