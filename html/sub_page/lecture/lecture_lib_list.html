@@ -68,7 +68,7 @@
         }
 
 
-        .container_cyber {
+        .container_lecture_lib_list {
             margin: 0 auto;
             /* min-width: 375px; */
             width : 90%;
@@ -78,11 +78,11 @@
             /* margin-bottom: 30px; */
         }
 
-        .toptext {
+        .lelilitoptext {
             text-align: center;
         }
 
-        .title > h3 {
+        .lelilititle > h3 {
             clear: both;
             font-size: 30px;
             color: white;
@@ -90,7 +90,7 @@
             padding-bottom: 20px;
         }
 
-        .cybertext {
+        .lelilitext {
             text-align: center;
             padding: 20px;
             padding-bottom: 0;
@@ -99,16 +99,16 @@
             color: #5271FF;
         }
         
-        .cyber {
+        .lelili {
             display: block;
             justify-content: center;
             padding-bottom: 10px;
             }
 
-        .cyber > button {
+        .lelili > button {
             flex: 0 0 40%;;
             margin: 7px;
-            font-size: 12px;
+            font-size: 10px;
             margin-top: 10px;
             padding: 10px;
             background-color: white;
@@ -119,12 +119,12 @@
             margin-bottom: 1px;
         }
 
-        .cyber > button > p, h4 {
+        .lelili > button > p, h4 {
             text-align: left;
-            margin-left: 0%;
+            margin-left: 5%;
         }
 
-        .cyber > button:hover {
+        .lelili > button:hover {
             background-color: #5271FF;
             color: white;
         }
@@ -184,7 +184,7 @@
             height: 800px;
         }
         
-        .container_cyber{
+        .container_lecture_lib_list{
             width: 70%;
             max-width: 600px;
             background-color: white;
@@ -195,10 +195,6 @@
         .search-container{
             width: 70%;
             max-width: 600px;
-        }
-
-        .cyber > button {
-            font-size: 15px;
         }
     
     }    
@@ -242,6 +238,14 @@
             </div>
         </div>
 
+ 
+        <!--뒤로가기 스크립트 -->
+        <script>
+            document.getElementById('backButton').addEventListener('click', function() {
+              window.history.back(); // 뒤로 가는 기능을 수행합니다.
+            });
+          </script>
+
         <!-- 메뉴스크립트 -->
         <script>
             $(document).ready(function () {
@@ -267,13 +271,6 @@
             });
         </script>
 
-        <!--뒤로가기 스크립트 -->
-        <script>
-            document.getElementById('backButton').addEventListener('click', function() {
-              window.history.back(); // 뒤로 가는 기능을 수행합니다.
-            });
-          </script>
-          
         <!--fullpage-->
         <div id="fullpage">
             <form class="search-container">
@@ -282,12 +279,12 @@
             </form>
           
             <!--수정할 곳 container_(페이지이름)-->
-            <div class="title">
-                <h3>사이버 강좌 안내</h3>
+            <div class="lelilititle">
+                <h3>도서관 강좌 안내</h3>
             </div>
-            <div class="container_cyber">
-                <div class="cybertext"><h4 class="toptext">무료 시설</h4></div>
-                <section class="cyber">
+            <div class="container_lecture_lib_list">
+                <div class="lelilitext"><h4 class="lelilitoptext">도서관 강좌</h4></div>
+                <section class="lelili">
                     <button>
                         <p>평생교육과(중구)</p><br>
                         <h4>2024년 서울특별시의회 의정모니터 교육</h4><br>

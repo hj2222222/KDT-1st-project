@@ -18,13 +18,18 @@
 
     <!-- script libraries -->
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
     <script src="../../js/jquery.fullPage.js"></script>
     <script src="../../js/slick.js"></script>
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=291c0031d5303797fc6e590328265969&libraries=services"
+    ></script>
     <script src="./wifimap.js"></script>
 
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <script src="./google-apps-script.js"></script>
+    <script src="../../js/script.js"></script>
 
     <style>  /* 앱 화면을 기준으로 개발 */
         body{
@@ -73,7 +78,7 @@
             margin: 0 auto;
             /* min-width: 375px; */
             width : 90%;
-            height: 100%;
+            height: 480px;
             background-color: white;  /*색 골라야함*/
             border-radius: 10px;
             padding-bottom: 10px;
@@ -129,7 +134,7 @@
             
         }
 
-        .box2 > #income {
+        .box2 > #district-select {
             float: left;
             width: 55%;
             display: flex;
@@ -141,7 +146,7 @@
             margin-right: 5%;
         }
 
-        .cleck {
+        #confirm-btn {
             font-size: 15px;
             width: 15%;
             display: flex;
@@ -223,14 +228,15 @@
                         <ul>
                             <li class="mine">
                                 <h3>Money Force</h3>
-                                <div class="btn_warp"><button onclick="window.location.href='../member/member_info.html'"  class="btn_info">회원정보</button>
-                                    <button  onclick="window.location.href='../member/post_mine.html'"class="btn_my">내가쓴글</button>
+                                <div class="btn_warp"><button onclick="window.location.href='../member/member_info.html'" class="btn_info">회원정보</button>
+                                    <button onclick="window.location.href='../member/post_mine.html'" class="btn_my">내가쓴글</button>
                                     <button onclick="window.location.href='../main/login.html'" class="btn_login">로그인</button></div>
                             </li>
-                            <li class="page1"><a href="../facility/librarycategory.html">편의시설</a></li>
-                            <li class="page2"><a href="../culture/culturechoice.html">문화생활</a></li>
-                            <li class="page3"><a href="../comunity/price_choice.html">물가소식</a></li>
-                            <li class="page4"><a href="#page4">셔틀버스</a></li>
+                            <li class="page1"><a href="facility_category.html">편의시설</a></li>
+                            <li class="page2"><a href="../lecture/lecture_category.html">무료강의</a></li>
+                            <li class="page2"><a href="../culture/culture_choice.html">문화생활</a></li>
+                            <li class="page3"><a href="../price/price_choice.html">물가소식</a></li>
+                            <li class="page4"><a href="../bus/bus_guchoice.html">셔틀버스</a></li>
                         </ul>
                     </nav>
                 </header>
@@ -277,10 +283,6 @@
             <div class="title">
                 <h3>공공 와이파이</h3>
             </div>
-            <form class="search-container">
-                <input type="text" id="search-bar">
-                <!-- <a href="#"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a> -->
-            </form>
             <div class="container_wifi">
                 <div class="wifitext"><h4 class="toptext">편의 시설</h4></div>
                 <div class="item">
@@ -288,7 +290,7 @@
                         <div class="smallwifi">
                             <div class="box2">
                                 <p>구 선택</p>
-                                <select name="income" id="income">
+                                <select name="income" id="district-select">
                                     <option value="1">강남구</option>
                                     <option value="2">강동구</option>
                                     <option value="3">강북구</option>
@@ -315,12 +317,12 @@
                                     <option value="24">중구</option>
                                     <option value="25">중랑구</option>
                                 </select>
-                                <button class="cleck"><p>확인</p></button>
+                                <button id="confirm-btn" onclick="moveMap()">확인</button>
                             </div>
                         </div>
                         <div class="accordion-content">
                             <div class="map-container">
-                                <iframe src="./map.html" style="width: 100%; border: none;"></iframe>
+                                <div id="map" style="width: 100%; height: 370px"></div>
                             </div>
                         </div>
                     </div>
@@ -328,13 +330,5 @@
             </div>
         </div>
     </div>
-
-        <!-- <footer>
-            <div>
-                ⓒ COPYLIGHT 2024 BY MONEY FORCE GROP
-            </div>
-        </footer> -->
-
 </body>
-
 </html>
