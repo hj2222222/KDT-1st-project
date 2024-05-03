@@ -547,4 +547,172 @@
 
 </body>
 
+<<<<<<< HEAD
+=======
+                button.classList.toggle('active');
+                if (button.classList.contains('active')) {
+                    button.textContent = '▲';
+                    accordionContent.style.display = 'block';
+                } else {
+                    button.textContent = '▼';
+                    accordionContent.style.display = 'none';
+                }
+            });
+        });
+</script>
+<script>
+    const key = '73434147476c686a39396f6a59474d'
+    const lists = document.querySelector('.item')
+    const number_list = document.querySelector('.number-list')
+    const back = document.querySelector('#back')
+    const front = document.querySelector('#front')
+    let bigPage = 1
+    let lastpage
+
+    page_init()
+    paging(1,bigPage)
+
+    fetch(`http://openapi.seoul.go.kr:8088/${key}/json/LOCALDATA_115002/1/2`)
+        .then((response)=>{
+            return response.json()
+        })
+        .then((data)=>{console.log(data)})
+
+    function lastpage_(){fetch(`http://openapi.seoul.go.kr:8088/${key}/json/LOCALDATA_115002/1/2`)
+        .then((response)=>{
+            return response.json()
+        })
+        .then((data)=>{
+            if ((Number(data.LOCALDATA_115002.list_total_count) % 50)==0){
+                lastpage = Number(data.LOCALDATA_115002.list_total_count) / 50
+            }else{
+                lastpage = parseInt(Number(data.LOCALDATA_115002.list_total_count) / 50)+1
+            }
+            if (bigPage==lastpage){
+                front.style.visibility = "hidden"
+            }else{
+                front.style.visibility = "visible"
+            }})}
+
+    function leastpage_(){
+        if(Number(bigPage) === 1){
+            back.style.visibility = "hidden"
+        }else{
+            back.style.visibility = "visible"
+        }
+    }
+
+    function paging(num,bigPage){
+        lists.replaceChildren()
+        let start
+        let end
+        if((num% 5) == 0){
+            start = 50*(bigPage-1)+(10*4)+1
+            end = 50*(bigPage-1)+(10*4)+10
+        }else{
+            start = 50*(bigPage-1)+(10*(num%5-1))+1
+            end = 50*(bigPage-1)+(10*(num%5-1))+10
+        }
+        url = `http://openapi.seoul.go.kr:8088/${key}/json/LOCALDATA_115002/${start}/${end}`
+        fetch(url)
+        .then((response)=>{
+            return response.json()
+        })
+        .then((data)=>{
+            console.log(data)
+            for (i=0;i<data.LOCALDATA_115002.row.length;i++){
+                let list = document.createElement('div')
+                let name = data.LOCALDATA_115002.row[i]['BPLCNM']
+                let state = data.LOCALDATA_115002.row[i]['DTLSTATENM']
+                let address = data.LOCALDATA_115002.row[i]['RDNWHLADDR']
+                let x = data.LOCALDATA_115002.row[i]['X']
+                let y = data.LOCALDATA_115002.row[i]['Y']
+                list.innerHTML+=` 
+                <p>이름 : ${name}</p>
+                <h4>상태 : ${state}</h4>
+                <p>주소 : ${address}</p>
+                `
+                list.classList.add('amenity_jobagency_slidelist')
+                lists.appendChild(list)
+            }
+        })
+    }
+
+    function page_init(){
+        number_list.replaceChildren()
+        lastpage_()
+        leastpage_()
+        fetch(`http://openapi.seoul.go.kr:8088/${key}/json/jobCafeOpenInfo/${50*(bigPage-1)+1}/${50*bigPage}`)
+        .then((response)=>{
+            return response.json()
+        })
+        .then((data)=>{
+            if (parseInt(data.jobCafeOpenInfo.row.length%10)!==0){
+                for(i=0;i<parseInt(data.jobCafeOpenInfo.row.length/10)+1;i++){
+                let pageNumber = document.createElement('div')
+                pageNumber.innerHTML+=`${5*(bigPage-1)+i+1}`
+                pageNumber.addEventListener('click',function(){(paging(pageNumber.innerText,bigPage))})
+                number_list.appendChild(pageNumber)
+            }
+            }else{
+            for(i=0;i<parseInt(data.jobCafeOpenInfo.row.length/10);i++){
+                let pageNumber = document.createElement('div')
+                pageNumber.innerHTML+=`${5*(bigPage-1)+i+1}`
+                pageNumber.addEventListener('click',function(){(paging(pageNumber.innerText,bigPage))})
+                number_list.appendChild(pageNumber)
+            }}
+        })
+    }
+
+
+    function page_plus(){
+        number_list.replaceChildren()
+        bigPage = parseInt(bigPage)
+        bigPage+= 1
+        lastpage_()
+        leastpage_()
+        fetch(`http://openapi.seoul.go.kr:8088/${key}/json/LOCALDATA_115002/${50*(bigPage-1)+1}/${50*bigPage}`)
+        .then((response)=>{
+            return response.json()
+        })
+        .then((data)=>{
+            if (parseInt(data.LOCALDATA_115002.row.length%10)!==0){
+                for(i=0;i<parseInt(data.LOCALDATA_115002.row.length/10)+1;i++){
+                let pageNumber = document.createElement('div')
+                pageNumber.innerHTML+=`${5*(bigPage-1)+i+1}`
+                pageNumber.addEventListener('click',function(){(paging(pageNumber.innerText,bigPage))})
+                number_list.appendChild(pageNumber)
+            }
+            }else{
+            for(i=0;i<parseInt(data.LOCALDATA_115002.row.length/10);i++){
+                let pageNumber = document.createElement('div')
+                pageNumber.innerHTML+=`${5*(bigPage-1)+i+1}`
+                pageNumber.addEventListener('click',function(){(paging(pageNumber.innerText,bigPage))})
+                number_list.appendChild(pageNumber)
+            }}
+        })
+    }
+    function page_minus(){
+        if (bigPage>1){
+            bigPage = parseInt(bigPage)
+            bigPage -= 1
+            leastpage_()
+            lastpage_()
+            number_list.replaceChildren()
+            fetch(`http://openapi.seoul.go.kr:8088/${key}/json/LOCALDATA_115002/${50*(bigPage-1)+1}/${50*bigPage}`)
+            .then((response)=>{
+                return response.json()
+            })
+            .then((data)=>{
+                for(i=0;i<parseInt(data.LOCALDATA_115002.row.length/10);i++){
+                    let pageNumber = document.createElement('div')
+                    pageNumber.innerHTML+=`${5*(bigPage-1)+i+1}`
+                    pageNumber.addEventListener('click',function(){(paging(pageNumber.innerText,bigPage))})
+                    number_list.appendChild(pageNumber)
+                }
+            })
+        }
+    }
+</script>
+>>>>>>> parent of 331ed21 (ㅇ)
 </html>
