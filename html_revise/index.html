@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> SAVEMORE | 로그인 </title>
+    
+    <!--아이콘-->
+    <link rel="icon" type="image/png" href="./img/logo1.png">
+    
+    <!--글씨체-->
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+    <!--style-->
+    <link rel="stylesheet" href="./css/slick.css">
+    <link rel="stylesheet" href="./css/slick-theme.css">
+    <link rel="stylesheet" href="./css/main.css">
+
+
+    <!-- script libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./js/jquery.fullPage.js"></script>
+    <script src="./js/slick.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="./google-apps-script.js"></script>
+
+    <style>
+        /* 앱 화면을 기준으로 개발 */
+
+        body {
+            min-width: 375px;
+            background: linear-gradient(135deg, #295fd5, #9d8ce0);
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            height: auto;
+        }
+
+        #fullpage {
+            height: auto;
+        }
+
+        #wrapper {
+            background-color: none;
+            background: linear-gradient(135deg, #295fd5, #9d8ce0);
+        }
+
+        .container_main {
+            margin: 0px auto 30px;
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+
+        }
+
+        .title_text {
+            text-shadow: 2px 2px 6px rgb(20, 20, 20);
+            padding: 10px;
+            padding-bottom: 0;
+            margin: 40px auto 20px;
+            text-align: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .intro {
+            position: relative;
+        }
+        .logo_warp{
+            background-color: yellow;
+            width: 80%;
+        }
+
+        .intro #logo_back {
+            margin-top: 30px;
+            width: 100%;
+            box-shadow: 3px 3px 10px rgba(248, 248, 248, 0.5);
+        }
+        .intro #logo3 {
+            position: absolute;
+            width: 40%;  
+            top: 28%;
+            left: 10%;
+        }
+
+        .intro p {
+            letter-spacing: 0spx;
+            font-size: 17px;
+            font-weight: 400;
+            width: 60%;
+            height: 50%;
+            line-height: 2.5;
+            text-align: right;
+            position: absolute;
+            top: 35%;
+            right: 10%;
+            color: #fff;
+            text-shadow: 1px 1px 5px rgb(0, 0, 0);
+        }
+
+        .intro span {
+            font-weight: 900;
+            font-size: 20px;
+            color: #295fd5;
+            text-shadow: 0px 0px 0px rgb(255, 255, 255);
+        }
+
+        .intro p,
+        .intro span,
+        .intro #logo3 {
+            animation: move 2s;
+            animation-fill-mode: both;
+        }
+
+        .intro p {
+            animation-delay: 0.2s;
+        }
+
+        .intro span {
+            animation-delay: 1.5s;
+        }
+        .intro #logo3{
+            animation-delay: 2.5s;
+        }
+
+        @keyframes move {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+
+        .section input[id*="slide"] {
+            display: none;
+        }
+
+        .section .slidewrap {
+            width: 100%;
+        }
+
+        .section .slidelist {
+            white-space: nowrap;
+            font-size: 0;
+            overflow: hidden;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section .slidelist>li {
+            display: inline-block;
+            vertical-align: middle;
+            width: 100%;
+            transition: all .5s;
+            margin: 0px auto;
+        }
+
+        .section .slidelist>li>a {
+            display: block;
+            position: relative;
+        }
+
+        .section .slidelist>li>a img {
+            border-radius: 20px;
+            width: 100%;
+        }
+
+        .section .slidelist label {
+            position: absolute;
+            z-index: 10;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 50px;
+            cursor: pointer;
+        }
+
+        .section .slidelist .textbox {
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .section .slidelist .textbox h3 {
+            font-size: 36px;
+            color: #fff;
+            ;
+            transform: translateY(30px);
+            transition: all .5s;
+        }
+
+        .section .slidelist .textbox p {
+            font-size: 16px;
+            color: #fff;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all .5s;
+        }
+
+        /* input에 체크되면 슬라이드 효과 */
+        .section input[id="slide01"]:checked~.slidewrap .slidelist>li {
+            transform: translateX(0%);
+        }
+
+        .section input[id="slide02"]:checked~.slidewrap .slidelist>li {
+            transform: translateX(-100%);
+        }
+
+        .section input[id="slide03"]:checked~.slidewrap .slidelist>li {
+            transform: translateX(-200%);
+        }
+
+        /* input에 체크되면 텍스트 효과 */
+        .section input[id="slide01"]:checked~.slidewrap li:nth-child(1) .textbox h3 {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: .2s;
+        }
+
+        .section input[id="slide01"]:checked~.slidewrap li:nth-child(1) .textbox p {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: .4s;
+        }
+
+        .section input[id="slide02"]:checked~.slidewrap li:nth-child(2) .textbox h3 {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: .2s;
+        }
+
+        .section input[id="slide02"]:checked~.slidewrap li:nth-child(2) .textbox p {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: .4s;
+        }
+
+        .section input[id="slide03"]:checked~.slidewrap li:nth-child(3) .textbox h3 {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: .2s;
+        }
+
+        .section input[id="slide03"]:checked~.slidewrap li:nth-child(3) .textbox p {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: .4s;
+        }
+
+        /* 좌,우 슬라이드 버튼 */
+        .slide-control>div {
+            display: none;
+        }
+
+        .section .left {
+            left: -30px;
+            background: url('/html/img/left.png') center center / 50% no-repeat;
+        }
+
+        .section .right {
+            right: -30px;
+            background: url('/html/img/right.png') center center / 50% no-repeat;
+        }
+
+        .section input[id="slide01"]:checked~.slidewrap .slide-control>div:nth-child(1) {
+            display: block;
+        }
+
+        .section input[id="slide02"]:checked~.slidewrap .slide-control>div:nth-child(2) {
+            display: block;
+        }
+
+        .section input[id="slide03"]:checked~.slidewrap .slide-control>div:nth-child(3) {
+            display: block;
+        }
+
+        /* 페이징 */
+        .slide-pagelist {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .slide-pagelist>li {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .slide-pagelist>li>label {
+            display: block;
+            padding: 8px 30px;
+            border-radius: 20px;
+            background: #ccc;
+            margin: 0px 10px;
+            cursor: pointer;
+        }
+
+        .section input[id="slide01"]:checked~.slidewrap .slide-pagelist>li:nth-child(1)>label {
+            background: #999;
+        }
+
+        .section input[id="slide02"]:checked~.slidewrap .slide-pagelist>li:nth-child(2)>label {
+            background: #999;
+        }
+
+        .section input[id="slide03"]:checked~.slidewrap .slide-pagelist>li:nth-child(3)>label {
+            background: #999;
+        }
+
+
+        /* gallery아티클 영역 */
+        #gallery {
+            width: 100%;
+            text-align: center;
+            height: 100%;
+            max-width: 600px;
+        }
+
+        #gallery>div {
+            margin-bottom: -60px;
+        }
+
+        #gallery>div>h3 {
+            margin: 10px auto;
+            margin-right: 20px;
+        }
+
+        #gallery>div>div:nth-of-type(1) {
+            height: 700px;
+            width: 100%;
+            max-width: 800px;
+            background: url(./img/gallery1.jpg) center center no-repeat;
+            animation: imgChange01 15s infinite;
+            animation-fill-mode: both;
+        }
+
+
+        @keyframes imgChange01 {
+            0% {
+                background: url(./img/gallery1.jpg) center no-repeat ;
+            }
+
+            25% {
+                background: url(./img/gallery2.jpg) center center no-repeat ;
+            }
+
+            50% {
+                background: url(./img/gallery3.jpg) center center no-repeat;
+            }
+
+            75% {
+                background: url(./img/gallery4.jpg) center center no-repeat;
+            }
+            100% {
+                background: url(./img/gallery1.jpg) center center no-repeat;
+            }
+        }
+
+        @media screen and (min-width: 500px) {
+        .intro #logo3 {
+            position: absolute;
+            width: 35%;  
+            top: 25%;
+            left: 15%;
+        }
+
+        .intro p {
+            letter-spacing: 0px;
+            font-size: 1.4rem;
+            font-weight: 400;
+            width: 60%;
+            height: 50%;
+            line-height: 2;
+            text-align: right;
+            position: absolute;
+            top: 35%;
+            right: 10%;
+            color: #fff;
+            text-shadow: 1px 1px 5px rgb(0, 0, 0);
+        }
+
+        .intro span {
+            font-weight: 700;
+            font-size: 30px;
+            color: #295fd5;
+            text-shadow: 0px 0px 0x rgb(255, 255, 255);
+        }
+
+        }
+
+        /*태블릿 이상 커졌을 때 반응형은 밑에서 수정!*/
+        @media screen and (min-width: 768px) {
+            #fullpage {
+                /* background-color: yellow; */
+                width: 90%;
+                margin: 0 auto;
+                padding-top: 100px;
+                height: auto;
+            }
+
+            .container_main {
+                width: 60%;
+                max-width: 800px;
+                margin: 50px auto;
+                height: auto;
+            }
+
+
+            .title_text {
+                font-size: 25px;
+                margin: 100px auto 40px;
+            }
+
+
+
+        .sub_text {
+                font-size: 20px;
+            }
+
+        #gallery {
+            text-align: center;
+            margin: 30px auto;
+        }
+
+        #gallery>div {
+            width: 100%;
+            margin: 10px auto;
+            margin-bottom: -140px;
+        }
+
+        #gallery>div>h3 {
+            margin: 40px auto 40px;
+            margin-right: 20px;
+        }
+        
+        #gallery>div>div:nth-of-type(1) {
+            width: 100%;
+            height: 800px;
+        }
+
+    }
+
+    @media screen and (min-width: 1200px) {
+        .intro #logo3 {
+            position: absolute;
+            width: 35%;  
+            top: 25%;
+            left: 15%;
+        }
+
+        .intro p {
+            font-size: 2rem;
+            font-weight: 400;
+            width: 60%;
+            height: 50%;
+            line-height: 2;
+            text-align: right;
+            position: absolute;
+            top: 35%;
+            right: 13%;
+        }
+
+        .intro span {
+            font-weight: 700;
+            font-size: 40px;
+        }
+
+    }
+    </style>
+
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <!--header_wrap-->
+        <div id="header_wrap">
+            <div class="header_content">
+
+                <!--header-->
+                <header>
+                    <img src="./img/화살표_왼쪽.png" alt="뒤로 가기" id="backButton">
+                    <h1><a href="#">SaveMore</a></h1>
+
+                    <!--nav-->
+                    <div class="drawer_menu">
+                        <div class="smallmenu"></div>
+                    </div>
+                    <nav>
+                        <div class="xmenu"></div>
+                        <ul>
+                            <li class="mine">
+                                <h3>Money Force</h3>
+                                <div class="btn_warp"><button class="btn_info"
+                                        onclick="window.location.href='./sub_page/member/member_info.html'">회원정보</button>
+                                    <button onclick="window.location.href='./sub_page/member/post_mine.html'"
+                                        class="btn_my">내가쓴글</button>
+                                    <button onclick="window.location.href='./sub_page/main/login.html'"
+                                        class="btn_login">로그인</button>
+                                </div>
+                            </li>
+                            <li class="page1"><a href="./sub_page/facility/facility_category.html">편의시설</a></li>
+                            <li class="page1"><a href="./sub_page/lecture/lecture_category.html">무료강의</a></li>
+                            <li class="page2"><a href="./sub_page/culture/culture_choice.html">문화생활</a></li>
+                            <li class="page3"><a href="./sub_page/price/price_choice.html">물가소식</a></li>
+                            <li class="page4"><a href="./sub_page/bus/bus_guchoice.html">셔틀버스</a></li>
+                        </ul>
+                    </nav>
+                </header>
+            </div>
+        </div>
+
+        <!-- 메뉴스크립트 -->
+        <script>
+            $(document).ready(function () {
+                var mBtn = $(".smallmenu");
+                var closeBtn = $(".xmenu");
+
+                // 버튼 클릭 이벤트
+                $(mBtn).click(function () {
+                    $("nav").css("right", "0");
+                    $(closeBtn).css("display", "block");
+                });
+
+                // 닫기 버튼 클릭 이벤트
+                $(closeBtn).click(function () {
+                    $("nav").css("right", "-100%");
+                    $(closeBtn).css("display", "none");
+                });
+                // nav 클릭 이벤트
+                $("nav").click(function () {
+                    $("nav").css("right", "-100%");
+                    $(closeBtn).css("display", "none");
+                });
+            });
+        </script>
+
+        <!--뒤로가기 스크립트 -->
+        <script>
+            document.getElementById('backButton').addEventListener('click', function () {
+                window.history.back(); // 뒤로 가는 기능을 수행합니다.
+            });
+        </script>
+
+
+        <!--fullpage-->
+        <div id="fullpage">
+            <!--수정할 곳 container_(페이지이름)-->
+            <div class="container_main">
+                <div class="intro">
+                    <img src="./img/logo_back.jpg" id="logo_back" alt="로고">
+                    <img src="./img/logo3.png"  id="logo3" alt="로고">
+                    <p><span>언제</span> 어디서나<br>
+                        <span>도움</span> 이 필요할 땐<br>
+                    </p>
+                </div>
+                <div class="title_text">
+                    <h3>이달의 소식</h3>
+                </div>
+                <div class="section">
+                    <input type="radio" name="slide" id="slide01" checked>
+                    <input type="radio" name="slide" id="slide02">
+                    <input type="radio" name="slide" id="slide03">
+                    <div class="slidewrap">
+
+                        <ul class="slidelist">
+                            <!-- 슬라이드 영역 -->
+                            <li class="slideitem">
+                                <a>
+                                    <img src="./img/notice1.jpg">
+                                </a>
+                            </li>
+                            <li class="slideitem">
+                                <a>
+                                    <img src="./img/notice2.png">
+                                </a>
+                            </li>
+                            <li class="slideitem">
+                                <a>
+                                    <img src="./img/notice3.png">
+                                </a>
+                            </li class="slideitem">
+
+                            <!-- 좌,우 슬라이드 버튼 -->
+                            <div class="slide-control">
+                                <div>
+                                    <label for="slide03" class="left"></label>
+                                    <label for="slide02" class="right"></label>
+                                </div>
+                                <div>
+                                    <label for="slide01" class="left"></label>
+                                    <label for="slide03" class="right"></label>
+                                </div>
+                                <div>
+                                    <label for="slide02" class="left"></label>
+                                    <label for="slide01" class="right"></label>
+                                </div>
+                            </div>
+
+                        </ul>
+                        <!-- 페이징 -->
+                        <ul class="slide-pagelist">
+                            <li><label for="slide01"></label></li>
+                            <li><label for="slide02"></label></li>
+                            <li><label for="slide03"></label></li>
+                        </ul>
+                    </div>
+
+
+                </div>
+                <article id="gallery">
+                    <div class="title_text">
+                        <h3>복지서비스</h3>
+                    </div>
+                    <div>
+                        <div>
+                            <div class="inner"> </div>
+                        </div>
+                        <div> </div>
+                        <div> </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+
+</body>
+
+</html>

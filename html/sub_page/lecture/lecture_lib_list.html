@@ -273,11 +273,6 @@
 
         <!--fullpage-->
         <div id="fullpage">
-            <form class="search-container">
-                <input type="text" id="search-bar">
-                <!-- <a href="#"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a> -->
-            </form>
-          
             <!--수정할 곳 container_(페이지이름)-->
             <div class="lelilititle">
                 <h3>도서관 강좌 안내</h3>
@@ -285,51 +280,6 @@
             <div class="container_lecture_lib_list">
                 <div class="lelilitext"><h4 class="lelilitoptext">도서관 강좌</h4></div>
                 <section class="lelili">
-                    <button>
-                        <p>평생교육과(중구)</p><br>
-                        <h4>2024년 서울특별시의회 의정모니터 교육</h4><br>
-                        <p>2024.04.09~2024.12.31</p>
-                    </button>
-                    <button>
-                        <p>평생교육과(중구)</p><br>
-                        <h4>2024년 서울특별시의회 의정모니터 교육</h4><br>
-                        <p>2024.04.09~2024.12.31</p>
-                    </button>
-                    <button>
-                        <p>평생교육과(중구)</p><br>
-                        <h4>2024년 서울특별시의회 의정모니터 교육</h4><br>
-                        <p>2024.04.09~2024.12.31</p>
-                    </button>
-                    <button>
-                        <p>평생교육과(중구)</p><br>
-                        <h4>2024년 서울특별시의회 의정모니터 교육</h4><br>
-                        <p>2024.04.09~2024.12.31</p>
-                    </button>
-                    <button>
-                        <p>평생교육과(중구)</p><br>
-                        <h4>2024년 서울특별시의회 의정모니터 교육</h4><br>
-                        <p>2024.04.09~2024.12.31</p>
-                    </button>
-                    <button>
-                        <p>평생교육과(중구)</p><br>
-                        <h4>2024년 서울특별시의회 의정모니터 교육</h4><br>
-                        <p>2024.04.09~2024.12.31</p>
-                    </button>
-                    <button>
-                        <p>평생교육과(중구)</p><br>
-                        <h4>2024년 서울특별시의회 의정모니터 교육</h4><br>
-                        <p>2024.04.09~2024.12.31</p>
-                    </button>
-                    <button>
-                        <p>평생교육과(중구)</p><br>
-                        <h4>2024년 서울특별시의회 의정모니터 교육</h4><br>
-                        <p>2024.04.09~2024.12.31</p>
-                    </button>
-                    <button>
-                        <p>평생교육과(중구)</p><br>
-                        <h4>2024년 서울특별시의회 의정모니터 교육</h4><br>
-                        <p>2024.04.09~2024.12.31</p>
-                    </button>
                     <button>
                         <p>평생교육과(중구)</p><br>
                         <h4>2024년 서울특별시의회 의정모니터 교육</h4><br>
@@ -361,12 +311,8 @@
 
 </body>
 <script>
-    //http://openapi.seoul.go.kr:8088/(인증키)/xml/OnlineCoures/1/5/ /201401
-    const key = '544c5149736c686a34357057774f55'
-    const lists = document.querySelector('.cyber')
-    // let category = prompt('찾으실 카테고리를 입력해주세요 없으면 공백으로 넘겨주세요.')
-    let category = ''
-    let title = ''
+    const key = '75736e4b516c686a3634515479514d'
+    const lists = document.querySelector('.lelili')
     let url
     const number_list = document.querySelector('.number-list')
     const back = document.querySelector('#back')
@@ -383,31 +329,31 @@
         title = document.querySelector('#search').value
         paging(1,1)
         number_list.replaceChildren()
-        fetch(`http://openapi.seoul.go.kr:8088/${key}/json/OnlineCoures/1/50/${category}/${title}`)
+        fetch(`http://openapi.seoul.go.kr:8088/${key}/json/SeoulLibraryLectureInfo/1/50/`)
         .then((response)=>{
             return response.json()
         })
         .then((data)=>{
             console.log(data)
-            if (parseInt(data.OnlineCoures.row.length%10)!==0){
-                for(i=0;i<parseInt(data.OnlineCoures.row.length/10)+1;i++){
+            if (parseInt(data.SeoulLibraryLectureInfo.row.length%10)!==0){
+                for(i=0;i<parseInt(data.SeoulLibraryLectureInfo.row.length/10)+1;i++){
                 let pageNumber = document.createElement('div')
                 pageNumber.innerHTML+=`${5*(bigPage-1)+i+1}`
                 pageNumber.addEventListener('click',function(){(paging(pageNumber.innerText,bigPage))})
                 number_list.appendChild(pageNumber)
             }
             }else{
-            for(i=0;i<parseInt(data.OnlineCoures.row.length/10);i++){
+            for(i=0;i<parseInt(data.SeoulLibraryLectureInfo.row.length/10);i++){
                 let pageNumber = document.createElement('div')
                 pageNumber.innerHTML+=`${5*(bigPage-1)+i+1}`
                 pageNumber.addEventListener('click',function(){(paging(pageNumber.innerText,bigPage))})
                 number_list.appendChild(pageNumber)
             }}
 
-            if ((Number(data.OnlineCoures.list_total_count) % 50)==0){
-                    lastpage = Number(data.OnlineCoures.list_total_count) / 50
+            if ((Number(data.SeoulLibraryLectureInfo.list_total_count) % 50)==0){
+                    lastpage = Number(data.SeoulLibraryLectureInfo.list_total_count) / 50
                 }else{
-                    lastpage = parseInt(Number(data.OnlineCoures.list_total_count) / 50)+1
+                    lastpage = parseInt(Number(data.SeoulLibraryLectureInfo.list_total_count) / 50)+1
                 }
             
                 if (bigPage==lastpage){
@@ -418,15 +364,15 @@
             })
         }
 
-    function lastpage_(){fetch(`http://openapi.seoul.go.kr:8088/${key}/json/OnlineCoures/1/2/${category}/${title}`)
+    function lastpage_(){fetch(`http://openapi.seoul.go.kr:8088/${key}/json/SeoulLibraryLectureInfo/1/2`)
         .then((response)=>{
             return response.json()
         })
         .then((data)=>{
-            if ((Number(data.OnlineCoures.list_total_count) % 50)==0){
-                lastpage = Number(data.OnlineCoures.list_total_count) / 50
+            if ((Number(data.SeoulLibraryLectureInfo.list_total_count) % 50)==0){
+                lastpage = Number(data.SeoulLibraryLectureInfo.list_total_count) / 50
             }else{
-                lastpage = parseInt(Number(data.OnlineCoures.list_total_count) / 50)+1
+                lastpage = parseInt(Number(data.SeoulLibraryLectureInfo.list_total_count) / 50)+1
             }
             if (bigPage==lastpage){
                 front.style.visibility = "hidden"
@@ -453,14 +399,12 @@
             start = 50*(bigPage-1)+(10*(num%5-1))+1
             end = 50*(bigPage-1)+(10*(num%5-1))+10
         }
-        if (title ===''){url = `http://openapi.seoul.go.kr:8088/${key}/json/OnlineCoures/${start}/${end}/${category}/`}
-        else{
-            url = `http://openapi.seoul.go.kr:8088/${key}/json/OnlineCoures/${start}/${end}/${category}/${title}`
-        }
+        url = `http://openapi.seoul.go.kr:8088/${key}/json/SeoulLibraryLectureInfo/${start}/${end}`
+
         fetch(url)
         .then((response)=>{
             return response.json()
-        })
+        }) 
         .then((data)=>{
 
             // <button>
@@ -468,20 +412,33 @@
             //     <h4>2024년 서울특별시의회 의정모니터 교육</h4><br>
             //     <p>2024.04.09~2024.12.31</p>
             // </button>
-
-            for (i=0;i<data.OnlineCoures.row.length;i++){
+                console.log(data)
+            for (i=0;i<data.SeoulLibraryLectureInfo.row.length;i++){
                 let list = document.createElement('button')
-                let deptname = data.OnlineCoures.row[i]['DEPT_NAME']
-                let name = data.OnlineCoures.row[i]['COURSE_NM']
-                let date = data.OnlineCoures.row[i]['COURSE_REQUEST_DT']
-                let category_ = data.OnlineCoures.row[i]['CATEGORY_NM2']
+                let img = document.createElement('button')
+                let fee = data.SeoulLibraryLectureInfo.row[i]['CHARGE']
+                let place = data.SeoulLibraryLectureInfo.row[i]['PLACE']
+                let title = data.SeoulLibraryLectureInfo.row[i]['TITLE']
+                let start = data.SeoulLibraryLectureInfo.row[i]['TERM_START_TIME']
+                let end = data.SeoulLibraryLectureInfo.row[i]['RECEIPT_END_DATE']
+                let status = data.SeoulLibraryLectureInfo.row[i]['STATUS_NAME']
+                let start1 = data.SeoulLibraryLectureInfo.row[i]['RECEIPT_START_DATE']
+                let end1 = data.SeoulLibraryLectureInfo.row[i]['RECEIPT_END_DATE']
+                let imgs = data.SeoulLibraryLectureInfo.row[i]['PHOTO_URL']
                 list.innerHTML+=` 
-                <p>${deptname}</p>
-                <p>${category_}</p>
-                <h4>${name}</h4>
-                <p>${date}</p>
+                <p>${title}</p>
+                <p>${place}</p>
+                <h4>${start}</h4>
+                <p>${fee}</p>
+                <p>${status}</p>
+                <p>접수기간 : ${start1.split(' ')[0]}~${end1.split(' ')[0]}</p>
                 `
+
+                img.innerHTML += `<img src="${imgs}">`
                 lists.appendChild(list)
+                if(imgs!==''){lists.appendChild(img)}
+                lists.innerHTML += '<hr style="margin-top:10px">'
+                
             }
         })
     }
@@ -494,20 +451,20 @@
         console.log(`last : ${lastpage}`)
         lastpage_()
         leastpage_()
-        fetch(`http://openapi.seoul.go.kr:8088/${key}/json/OnlineCoures/${50*(bigPage-1)+1}/${50*bigPage}/${category}/${title}`)
+        fetch(`http://openapi.seoul.go.kr:8088/${key}/json/SeoulLibraryLectureInfo/${50*(bigPage-1)+1}/${50*bigPage}`)
         .then((response)=>{
             return response.json()
         })
         .then((data)=>{
-            if (parseInt(data.OnlineCoures.row.length%10)!==0){
-                for(i=0;i<parseInt(data.OnlineCoures.row.length/10)+1;i++){
+            if (parseInt(data.SeoulLibraryLectureInfo.row.length%10)!==0){
+                for(i=0;i<parseInt(data.SeoulLibraryLectureInfo.row.length/10)+1;i++){
                 let pageNumber = document.createElement('div')
                 pageNumber.innerHTML+=`${5*(bigPage-1)+i+1}`
                 pageNumber.addEventListener('click',function(){(paging(pageNumber.innerText,bigPage))})
                 number_list.appendChild(pageNumber)
             }
             }else{
-            for(i=0;i<parseInt(data.OnlineCoures.row.length/10);i++){
+            for(i=0;i<parseInt(data.SeoulLibraryLectureInfo.row.length/10);i++){
                 let pageNumber = document.createElement('div')
                 pageNumber.innerHTML+=`${5*(bigPage-1)+i+1}`
                 pageNumber.addEventListener('click',function(){(paging(pageNumber.innerText,bigPage))})
@@ -522,12 +479,12 @@
             leastpage_()
             lastpage_()
             number_list.replaceChildren()
-            fetch(`http://openapi.seoul.go.kr:8088/${key}/json/culturalEventInfo/${50*(bigPage-1)+1}/${50*bigPage}/${category}/${title}`)
+            fetch(`http://openapi.seoul.go.kr:8088/${key}/json/SeoulLibraryLectureInfo/${50*(bigPage-1)+1}/${50*bigPage}`)
             .then((response)=>{
                 return response.json()
             })
             .then((data)=>{
-                for(i=0;i<parseInt(data.culturalEventInfo.row.length/10);i++){
+                for(i=0;i<parseInt(data.SeoulLibraryLectureInfo.row.length/10);i++){
                     let pageNumber = document.createElement('div')
                     pageNumber.innerHTML+=`${5*(bigPage-1)+i+1}`
                     pageNumber.addEventListener('click',function(){(paging(pageNumber.innerText,bigPage))})

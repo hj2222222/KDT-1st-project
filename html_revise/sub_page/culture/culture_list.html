@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> SAVEMORE | 문화생활 </title>
+    
+    <!--아이콘-->
+    <link rel="icon" type="image/png" href="../../img/logo1.png">
+
+    <!--글씨체-->
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+    <!--style-->
+    <link rel="stylesheet" href="../../css/slick.css">
+    <link rel="stylesheet" href="../../css/slick-theme.css">
+    <link rel="stylesheet" href="../../css/main.css">
+
+
+    <!-- script libraries -->
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="../../js/jquery.fullPage.js"></script>
+    <script src="../../js/slick.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- <script src="./google-apps-script.js"></script> -->
+
+    <style>  /* 앱 화면을 기준으로 개발 */
+        body{
+            min-width: 375px;
+            height: 100%;
+        }
+        #fullpage{
+            padding-bottom: 40px;
+            height: 100%;
+        }
+
+        #wrapper {
+            height: 100%;
+        }
+        
+        /* 검색바 */
+        .search-container {
+            width: 90%;
+            display: block;
+            margin: 20px auto;
+            border-radius: 5px;
+        }
+
+        input#search-bar {
+            box-sizing: border-box;
+            margin: 0 auto;
+            width: 100%;
+            height: 35px;
+            padding: 0 10px;
+            font-size: 0.8rem;
+            border: 1px solid #a3a3a3;
+            outline: none;
+            border-radius: 10px;
+        }
+
+        .search-icon {
+            position: relative;
+            float: right;
+            width: 60px;
+            height: 60px;
+            top: -47px;
+            right: -8px;
+        }
+
+
+        .container_culture_event_list {
+            margin: 0 auto;
+            /* min-width: 375px; */
+            width : 90%;
+            height: 100%;
+            background-color: white;  /*색 골라야함*/
+            border-radius: 10px;
+            /* margin-bottom: 30px; */
+        }
+
+        .toptext {
+            text-align: center;
+        }
+
+        .title > h3 {
+            clear: both;
+            font-size: 20px;
+            color: white;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .eventlisttext {
+            text-align: center;
+            padding: 20px;
+            padding-bottom: 0;
+            font-size: 15px;
+            margin-bottom: 10px;
+            color: #5271FF;
+        }
+        
+        .eventlist {
+            display: block;
+            justify-content: center;
+            padding-bottom: 10px;
+            }
+
+        .eventlist > button {
+            flex: 0 0 40%;;
+            margin: 7px;
+            font-size: 10px;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: white;
+            border: 1px solid rgb(141, 136, 136);
+            border-radius: 10px;
+            box-shadow: 0 0 3px rgba(15, 15, 16, 0.5);
+            width: 95%;
+            margin-bottom: 1px;
+        }
+
+        .eventlist > button > p, h4 {
+            text-align: left;
+            margin-left: 5%;
+        }
+
+        .eventlist > button:hover {
+            background-color: #5271FF;
+            color: white;
+        }
+
+        #event-list{
+            border: none;
+        }
+        #culture-list>div{
+            border-bottom: 1px solid black;
+        }
+
+        #number-list{
+            width: 100%;
+            height: 70px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .number-lists{
+            /* height: 50px; */
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 190%;
+            padding: auto;
+        }
+        .number-list{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20%;
+            list-style: none;
+            padding: 0;
+        }
+        #number-list>div>div>div:hover{
+            cursor: pointer;
+            color: blue;
+            font-weight: bold;
+        }
+        div.move{
+            line-height: 3;
+            
+        }
+        div.move:hover{
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /*태블릿 이상 커졌을 때 반응형은 밑에서 수정!*/
+         @media screen and (min-width: 768px) {
+            #fullpage {
+            /* background-color: yellow; */
+            width: 90%;
+            margin: 0 auto;
+            padding-top: 100px;
+            height: 800px;
+        }
+        
+        .container_culture_event_list{
+            width: 70%;
+            max-width: 600px;
+            background-color: white;
+            margin:0 auto;
+            height: auto;
+        }
+
+            /* 검색바 */
+            .search-container {
+                width: 85%;
+                margin: 30px auto;
+            }
+
+            input#search-bar {
+                height: 45px;
+                padding: 0 10px;
+                font-size: 1rem;
+                border: 1px solid #a3a3a3;
+                outline: none;
+            }
+
+            .search-icon {
+                width: 65px;
+                height: 65px;
+                top: -56px;
+                right: -5px;
+            }
+            .title > h3 {
+                padding-top: 20px;
+                font-size: 25px;
+            }
+            .eventlisttext {
+            font-size: 20px;
+        }
+    }    
+    </style>
+
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <!--header_wrap-->
+        <div id="header_wrap">
+            <div class="header_content">
+
+                <!--header-->
+                <header>
+                    <img src="../../img/화살표_왼쪽.png" alt="" onclick="window.history.back()"> 
+                    <h1><a href="../../index.html">SaveMore</a></h1>
+
+                    <!--nav-->
+                    <div class="drawer_menu">
+                        <div class="smallmenu"></div>
+                    </div>
+                    <nav>
+                        <div class="xmenu"></div>
+                        <ul>
+                            <li class="mine">
+                                <h3>Money Force</h3>
+                                <div class="btn_warp"><button onclick="window.location.href='../member/member_info.html'" class="btn_info">회원정보</button>
+                                    <button onclick="window.location.href='../member/post_mine.html'" class="btn_my">내가쓴글</button>
+                                    <button onclick="window.location.href='../main/login.html'" class="btn_login">로그인</button></div>
+                            </li>
+                            <li class="page1"><a href="../facility/facility_category.html">편의시설</a></li>
+                            <li class="page2"><a href="../lecture/lecture_category.html">무료강의</a></li>
+                            <li class="page2"><a href="culture_choice.html">문화생활</a></li>
+                            <li class="page3"><a href="../price/price_choice.html">물가소식</a></li>
+                            <li class="page4"><a href="../bus/bus_guchoice.html">셔틀버스</a></li>
+                        </ul>
+                    </nav>
+                </header>
+            </div>
+        </div>
+
+        <!-- 메뉴스크립트 -->
+        <script>
+            $(document).ready(function () {
+                var mBtn = $(".smallmenu");
+                var closeBtn = $(".xmenu");
+
+                // 버튼 클릭 이벤트
+                $(mBtn).click(function () {
+                    $("nav").css("right", "0");
+                    $(closeBtn).css("display", "block");
+                });
+
+                // 닫기 버튼 클릭 이벤트
+                $(closeBtn).click(function () {
+                    $("nav").css("right", "-100%");
+                    $(closeBtn).css("display", "none");
+                });
+                // nav 클릭 이벤트
+                $("nav").click(function () {
+                    $("nav").css("right", "-100%");
+                    $(closeBtn).css("display", "none");
+                });
+            });
+        </script>
+
+        <!--뒤로가기 스크립트 -->
+        <script>
+            document.getElementById('backButton').addEventListener('click', function() {
+              window.history.back(); // 뒤로 가는 기능을 수행합니다.
+            });
+          </script>
+
+        <!--fullpage-->
+        <div id="fullpage">
+            <div class="title">
+                <h3>문화 행사 안내</h3>
+            </div>
+            <div class="container_culture_event_list" style="padding-top: 20px;">
+                <form class="search-container">
+                    <input type="text" id="search-bar">
+                    <a href="#" onclick="search_word()"><img class="search-icon"
+                            src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
+                </form>
+                <div class="eventlisttext"><h4 class="toptext">문화 행사</h4></div>
+                <section class="eventlist" id="culture-list">
+                    <button onclick="window.location.href='culture_detail.html'" >
+                        <p>뮤지컬/오페라</p><br>
+                        <h4>오페라 갈라</h4><br>
+                        <p>2024.12.07~2024.12.07</p>
+                    </button>
+                </section>
+                <div id="culture-list"></div>
+                    <div id="number-list">
+                        <div class="number-lists">
+                            <div onclick="page_minus()" class="move" id="back">&lt;</div>
+                            <div class="number-list">
+                                <div onclick="paging(this.innerText,bigPage)">1</div>
+                                <div onclick="paging(this.innerText,bigPage)">2</div>
+                                <div onclick="paging(this.innerText,bigPage)">3</div>
+                                <div onclick="paging(this.innerText,bigPage)">4</div>
+                                <div onclick="paging(this.innerText,bigPage)">5</div>
+                            </div>
+                            <div onclick="page_plus()" class="move" id="front">&gt;</div>
+                        </div>
+                    </div>  
+            </div>
+        </div>
+
+        <!-- <footer>
+            <div>
+                ⓒ COPYLIGHT 2024 BY MONEY FORCE GROP
+            </div>
+        </footer> -->
+
+</body>
+<script>
+        const key = '6265704e6d6c686a373970714a4862'
+        const urlParams = new URLSearchParams(window.location.search).get('category');
+        const lists = document.querySelector('#culture-list')
+        let category = urlParams
+        let title = ''
+        let url
+        const categorys = document.querySelector('.toptext')
+        categorys.innerText = urlParams
+        const number_list = document.querySelector('.number-list')
+        const back = document.querySelector('#back')
+        const front = document.querySelector('#front')
+        let bigPage = 1
+        let lastpage
+
+        page_init()
+        paging(1,bigPage)
+        leastpage_()
+
+        fetch(`http://openapi.seoul.go.kr:8088/${key}/json/culturalEventInfo/1/50/${category}/${title}`)
+            .then((response)=>{
+                return response.json()
+            })
+            .then((data)=>{
+                console.log(data)})
+
+        function search_word(){
+            bigPage = 1
+            title = document.querySelector('#search-bar').value
+            paging(1,1)
+            number_list.replaceChildren()
+            fetch(`http://openapi.seoul.go.kr:8088/${key}/json/culturalEventInfo/1/50/${category}/${title}`)
+            .then((response)=>{
+                return response.json()
+            })
+            .then((data)=>{
+                console.log(data)
+                if (parseInt(data.culturalEventInfo.row.length%10)!==0){
+                    for(i=0;i<parseInt(data.culturalEventInfo.row.length/10)+1;i++){
+                    let pageNumber = document.createElement('div')
+                    pageNumber.innerHTML+=`${5*(bigPage-1)+i+1}`
+                    pageNumber.addEventListener('click',function(){(paging(pageNumber.innerText,bigPage))})
+                    number_list.appendChild(pageNumber)
+                }
+                }else{
+                for(i=0;i<parseInt(data.culturalEventInfo.row.length/10);i++){
+                    let pageNumber = document.createElement('div')
+                    pageNumber.innerHTML+=`${5*(bigPage-1)+i+1}`
+                    pageNumber.addEventListener('click',function(){(paging(pageNumber.innerText,bigPage))})
+                    number_list.appendChild(pageNumber)
+                }}
+
+                if ((Number(data.culturalEventInfo.list_total_count) % 50)==0){
+                        lastpage = Number(data.culturalEventInfo.list_total_count) / 50
+                    }else{
+                        lastpage = parseInt(Number(data.culturalEventInfo.list_total_count) / 50)+1
+                    }
+                
+                    if (bigPage==lastpage){
+                        front.style.visibility = "hidden"
+                    }else{
+                        front.style.visibility = "visible"
+                    }  
+                })
+            }
+
+    function lastpage_(){fetch(`http://openapi.seoul.go.kr:8088/${key}/json/culturalEventInfo/1/2/${category}/${title}`)
+        .then((response)=>{
+            return response.json()
+        })
+        .then((data)=>{
+            if ((Number(data.culturalEventInfo.list_total_count) % 50)==0){
+                lastpage = Number(data.culturalEventInfo.list_total_count) / 50
+            }else{
+                lastpage = parseInt(Number(data.culturalEventInfo.list_total_count) / 50)+1
+            }
+            if (bigPage==lastpage){
+                front.style.visibility = "hidden"
+            }else{
+                front.style.visibility = "visible"
+            }})}
+
+    function leastpage_(){
+        if(Number(bigPage) === 1){
+            back.style.visibility = "hidden"
+        }else{
+            back.style.visibility = "visible"
+        }
+    }
+
+    function paging(num,bigPage){
+            lists.replaceChildren()
+            let start
+            let end
+            if((num% 5) == 0){
+                start = 50*(bigPage-1)+(10*4)+1
+                end = 50*(bigPage-1)+(10*4)+10
+            }else{
+                start = 50*(bigPage-1)+(10*(num%5-1))+1
+                end = 50*(bigPage-1)+(10*(num%5-1))+10
+        }
+        url = `http://openapi.seoul.go.kr:8088/${key}/json/culturalEventInfo/${start}/${end}/${category}/${title}`
+        fetch(url)
+            .then((response)=>{
+                return response.json()
+            })
+            .then((data)=>{
+                console.log(data)
+                for (i=0;i<data.culturalEventInfo.row.length;i++){
+                    let list = document.createElement('button')
+                    let codename = data.culturalEventInfo.row[i]['CODENAME']
+                    let title = data.culturalEventInfo.row[i]['TITLE']
+                    let date = data.culturalEventInfo.row[i]['DATE']
+                    let free = data.culturalEventInfo.row[i]['IS_FREE']
+                    let link = data.culturalEventInfo.row[i]['HMPG_ADDR']
+                    let place = data.culturalEventInfo.row[i]['PLACE']
+                    let ORG_NAME = data.culturalEventInfo.row[i]['ORG_NAME']
+                    list.innerHTML+=` 
+                    <p>종류 : ${codename}</p>
+                    <h4>제목 : ${title}</h4>
+                    <p>유료여부 : ${free}</p>
+                    <p>장소 : ${place}</p>
+                    <p>공연자 : ${ORG_NAME}</p>
+                    <p>${date}</p>
+                    `
+                    lists.appendChild(list)
+                    console.log(title)
+                    list.onclick = function(){
+                        window.location.href = `${link}`
+                    }
+                }
+            })
+        }
+        function page_plus(){
+            number_list.replaceChildren()
+        bigPage = parseInt(bigPage)
+        bigPage+= 1
+        lastpage_()
+        leastpage_()
+        fetch(`http://openapi.seoul.go.kr:8088/${key}/json/culturalEventInfo/${50*(bigPage-1)+1}/${50*bigPage}/${category}/${title}`)
+        .then((response)=>{
+            return response.json()
+        })
+        .then((data)=>{
+            if (parseInt(data.culturalEventInfo.row.length%10)!==0){
+                for(i=0;i<parseInt(data.culturalEventInfo.row.length/10)+1;i++){
+                let pageNumber = document.createElement('div')
+                pageNumber.innerHTML+=`${5*(bigPage-1)+i+1}`
+                pageNumber.addEventListener('click',function(){(paging(pageNumber.innerText,bigPage))})
+                number_list.appendChild(pageNumber)
+            }
+            }else{
+            for(i=0;i<parseInt(data.culturalEventInfo.row.length/10);i++){
+                let pageNumber = document.createElement('div')
+                pageNumber.innerHTML+=`${5*(bigPage-1)+i+1}`
+                pageNumber.addEventListener('click',function(){(paging(pageNumber.innerText,bigPage))})
+                number_list.appendChild(pageNumber)
+            }}
+        })
+    }
+    function page_minus(){
+        if (bigPage>1){
+            bigPage = parseInt(bigPage)
+            bigPage -= 1
+            leastpage_()
+            lastpage_()
+            number_list.replaceChildren()
+            fetch(`http://openapi.seoul.go.kr:8088/${key}/json/culturalEventInfo/${50*(bigPage-1)+1}/${50*bigPage}/${category}/${title}`)
+            .then((response)=>{
+                return response.json()
+            })
+            .then((data)=>{
+                for(i=0;i<parseInt(data.culturalEventInfo.row.length/10);i++){
+                    let pageNumber = document.createElement('div')
+                    pageNumber.innerHTML+=`${5*(bigPage-1)+i+1}`
+                    pageNumber.addEventListener('click',function(){(paging(pageNumber.innerText,bigPage))})
+                    number_list.appendChild(pageNumber)
+                }
+            })
+        }
+    }
+    function page_init(){
+        number_list.replaceChildren()
+        fetch(`http://openapi.seoul.go.kr:8088/${key}/json/culturalEventInfo/${50*(bigPage-1)+1}/${50*bigPage}/${category}/${title}`)
+        .then((response)=>{
+            return response.json()
+        })
+        .then((data)=>{
+            console.log(data)
+            console.log(`http://openapi.seoul.go.kr:8088/${key}/json/culturalEventInfo/${50*(bigPage-1)+1}/${50*bigPage}/${category}/${title}`)
+            if (parseInt(data.culturalEventInfo.row.length%10)!==0){
+                for(i=0;i<parseInt(data.culturalEventInfo.row.length/10)+1;i++){
+                let pageNumber = document.createElement('div')
+                pageNumber.innerHTML+=`${5*(bigPage-1)+i+1}`
+                pageNumber.addEventListener('click',function(){(paging(pageNumber.innerText,bigPage))})
+                number_list.appendChild(pageNumber)
+            }
+            }else{
+            for(i=0;i<parseInt(data.culturalEventInfo.row.length/10);i++){
+                let pageNumber = document.createElement('div')
+                pageNumber.innerHTML+=`${5*(bigPage-1)+i+1}`
+                pageNumber.addEventListener('click',function(){(paging(pageNumber.innerText,bigPage))})
+                number_list.appendChild(pageNumber)
+            }}
+        })
+        lastpage_()
+        leastpage_()
+    }
+</script>
+</html>

@@ -24,7 +24,7 @@
     <script
     type="text/javascript"
     src="//dapi.kakao.com/v2/maps/sdk.js?appkey=291c0031d5303797fc6e590328265969&libraries=services"></script>
-    <script src="./maptest.js"></script>
+    <!-- <script src="./maptest.js"></script> -->
     
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -298,12 +298,7 @@
           </script>
 
         <!--fullpage-->
-        <div id="fullpage">
-            <form class="search-container">
-                <input type="text" id="search-bar">
-                <!-- <a href="#"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a> -->
-            </form>
-          
+        <div id="fullpage">        
             <!--수정할 곳 container_(페이지이름)-->
             <div class="title">
                 <h3>공공 도서관 안내</h3>
@@ -345,8 +340,8 @@
                             <div onclick="page_plus()" class="move" id="front">&gt;</div>
                         </div>
                     </div>  
+                </div>
             </div>
-        </div>
 </body>
 <script>
     //http://openapi.seoul.go.kr:8088/(인증키)/xml/SeoulPublicLibraryInfo/1/5/
@@ -377,7 +372,7 @@
             }else{
                 lastpage = parseInt(Number(data.SeoulPublicLibraryInfo.list_total_count) / 50)+1
             }
-            if (bigPage==lastpage || bigPage==1){
+            if (bigPage==lastpage){
                 front.style.visibility = "hidden"
             }else{
                 front.style.visibility = "visible"
@@ -420,37 +415,22 @@
                 let url = data.SeoulPublicLibraryInfo.row[i]['HMPG_URL']
                 let time = data.SeoulPublicLibraryInfo.row[i]['OP_TIME']
                 let holiday = data.SeoulPublicLibraryInfo.row[i]['FDRM_CLOSE_DATE']
-                let x = data.SeoulPublicLibraryInfo.row[i]['X']
-                let y = data.SeoulPublicLibraryInfo.row[i]['Y']
+                const x = data.SeoulPublicLibraryInfo.row[i]['XCNTS']
+                const y = data.SeoulPublicLibraryInfo.row[i]['YDNTS']
                 smalllibrary.innerHTML+=` 
                 <p>${type}</p>
                 <h4>${name}</h4>
                 <p>${address}</p>
                 `
-                let button = document.createElement('button')
-                button.classList.add('toggle-button')
-                button.innerText = '▼'
-                button.addEventListener('click', () => {
-                const accordionContent = button.parentElement.nextElementSibling;
-
-                button.classList.toggle('active');
-                if (button.classList.contains('active')) {
-                    button.textContent = '▲';
-                    accordionContent.style.display = 'block';
-                } else {
-                    button.textContent = '▼';
-                    accordionContent.style.display = 'none';
-                    }
-                });
-                smalllibrary.appendChild(button)
-
                 accordion_content.innerHTML+=` 
                 <p>도서관 전화번호 : ${tel}</p>
                 <p><a href ='${url}'>홈페이지 url : ${url}</a></h4>
                 <p>운영시간 : ${time}</p>
                 <p>${holiday}</p>
                 <div class="map-container">
-                    <iframe src="./map.html" style="width: 100%; border: none;"></iframe>
+                    <div class="map-container">
+                        <div id="map${i}" style="width: 100%; height: 300px"></div>
+                    </div>
                 </div>
                 `
                 list.classList.add('library')
@@ -459,9 +439,89 @@
                 list.appendChild(smalllibrary)
                 list.appendChild(accordion_content)
                 lists.appendChild(list)
+                let maps = document.querySelector(`#map${i}`)
+                console.log(x)
+                console.log(y)
+                let map = initializeMap(maps,x,y)
             }
         })
     }
+
+    function initializeMap(map, lat, lng) {
+    // var container = document.getElementById(containerId);
+    // 지도를 생성할 때 사용할 옵션
+    var mapOptions = {
+        center: new kakao.maps.LatLng(lat, lng), //지도의 중심좌표.
+        level: 3 //지도의 레벨(확대, 축소 정도)
+    };
+    
+    var map = new kakao.maps.Map(map, mapOptions);
+        
+    var zoomControl = new kakao.maps.ZoomControl();
+    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+    // 마커 이미지 설정
+    var imageSrc = "https://dau2wmhjxkxtx.cloudfront.net/web-static/static_webapp_v2/img/icons/location-red.svg",
+        imageSize = new kakao.maps.Size(64, 69),
+        imageOption = { offset: new kakao.maps.Point(27, 69) };
+    
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+    
+    // 지도 객체 생성
+    var maps = [];
+    var geocoder = new kakao.maps.services.Geocoder();
+
+    var containers = document.querySelectorAll('.map-container > div[id^="map"]');
+    containers.forEach(function(container) {
+        
+    
+        // 지도 이벤트 추가
+        // kakao.maps.event.addListener(map, "idle", function () {
+        // searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+        // });
+    
+        // 마커 추가
+        var markerPosition = map.getCenter(); // 마커가 표시될 위치를 지도의 중심으로 설정합니다.
+        var marker = new kakao.maps.Marker({
+            position: markerPosition,
+            image: markerImage
+        });
+        marker.setMap(map);
+
+    
+        // maps.push(map); // 생성된 지도를 배열에 추가
+    });
+    
+    // 주소 검색 후 지도 중심을 변경하는 예제 함수
+    function searchAddrFromCoords(coords, callback) {
+        // 좌표로 행정동 주소 정보를 요청합니다
+        geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);
+    }
+    
+    function searchDetailAddrFromCoords(coords, callback) {
+        // 좌표로 법정동 상세 주소 정보를 요청합니다
+        geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+    }
+    
+    // 특정 주소에 마커 표시
+    function addMarkerAtAddress(address) {
+        geocoder.addressSearch(address, function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+            maps.forEach(function(map) {
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: coords,
+                image: markerImage
+            });
+            });
+        }
+        });
+    }
+    
+    // 주소 정보를 바탕으로 각 지도에 마커를 추가합니다.
+    addMarkerAtAddress("갈현로 21길");
+}
 
     function page_plus(){
         number_list.replaceChildren()
@@ -516,20 +576,20 @@
         number_list.replaceChildren()
         lastpage_()
         leastpage_()
-        fetch(`http://openapi.seoul.go.kr:8088/${key}/json/jobCafeOpenInfo/${50*(bigPage-1)+1}/${50*bigPage}`)
+        fetch(`http://openapi.seoul.go.kr:8088/${key}/json/SeoulPublicLibraryInfo/${50*(bigPage-1)+1}/${50*bigPage}`)
         .then((response)=>{
             return response.json()
         })
         .then((data)=>{
-            if (parseInt(data.jobCafeOpenInfo.row.length%10)!==0){
-                for(i=0;i<parseInt(data.jobCafeOpenInfo.row.length/10)+1;i++){
+            if (parseInt(data.SeoulPublicLibraryInfo.row.length%10)!==0){
+                for(i=0;i<parseInt(data.SeoulPublicLibraryInfo.row.length/10)+1;i++){
                 let pageNumber = document.createElement('div')
                 pageNumber.innerHTML+=`${5*(bigPage-1)+i+1}`
                 pageNumber.addEventListener('click',function(){(paging(pageNumber.innerText,bigPage))})
                 number_list.appendChild(pageNumber)
             }
             }else{
-            for(i=0;i<parseInt(data.jobCafeOpenInfo.row.length/10);i++){
+            for(i=0;i<parseInt(data.SeoulPublicLibraryInfo.row.length/10);i++){
                 let pageNumber = document.createElement('div')
                 pageNumber.innerHTML+=`${5*(bigPage-1)+i+1}`
                 pageNumber.addEventListener('click',function(){(paging(pageNumber.innerText,bigPage))})
